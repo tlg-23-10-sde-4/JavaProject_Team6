@@ -1,27 +1,29 @@
 package com.tacocardgame.model;
 
+import java.util.List;
+
 public class Npc extends Player {
 
     private String name;
 
-    @Override
-    public static void playerSays() {
 
+    public Npc(String name, List playerHand) {
+        getName();
+        playerHand = getPlayerHand();
     }
 
     @Override
-    public static void playerChecks() {
+    public void playerChecks() {
 
     }
 
-    @Override
+//    @Override
     public static void playerWaits() {
 
     }
 
-    @Override
+//    @Override
     public static void playerSlaps() {
-
     }
 
     public void setName(String name) {
