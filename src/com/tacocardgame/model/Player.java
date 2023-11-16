@@ -47,7 +47,7 @@ public class Player {
         // Player takes player.playerHand(0) and turns it over into the pile
     }
 
-    public static void playerChecks() {
+    public  void playerChecks() {
 
     }
 
@@ -55,7 +55,7 @@ public class Player {
 
     }
 
-    public void playerSlaps() {
+    public static void playerSlaps() {
 
     }
 

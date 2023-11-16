@@ -13,16 +13,16 @@ public class Npc extends Player {
     }
 
     @Override
-    public static void playerChecks() {
+    public void playerChecks() {
 
     }
 
-    @Override
+//    @Override
     public static void playerWaits() {
 
     }
 
-    @Override
+//    @Override
     public static void playerSlaps() {
     }
 

@@ -1,7 +1,7 @@
 package com.tacocardgame.model;
 
 public class Card {
-    class Card {
+
         private String name;
         private String image;
 
@@ -11,8 +11,6 @@ public class Card {
         }
 
         public void show() {
-            sout(image);
+            System.out.println(image);
         }
-
-    }
 }
