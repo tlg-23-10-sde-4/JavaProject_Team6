@@ -12,6 +12,21 @@ public class Player {
     private List<Card> playerHand = new ArrayList<>();
     private String name;
 
+    // CONSTRUCTOR
+
+    public Player() {
+
+    }
+
+    public Player(String name) {
+
+    }
+
+    public Player(String name, List<Card> playerHand) {
+        setName(name);
+        setPlayerHand(playerHand);
+    }
+
     // METHODS
 
     public String playerSays() {
