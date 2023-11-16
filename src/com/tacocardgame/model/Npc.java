@@ -1,12 +1,15 @@
 package com.tacocardgame.model;
 
+import java.util.List;
+
 public class Npc extends Player {
 
     private String name;
 
-    @Override
-    public static void playerSays() {
 
+    public Npc(String name, List playerHand) {
+        getName();
+        playerHand = getPlayerHand();
     }
 
     @Override
@@ -21,7 +24,7 @@ public class Npc extends Player {
 
     @Override
     public static void playerSlaps() {
-
+        for
     }
 
     public void setName(String name) {
