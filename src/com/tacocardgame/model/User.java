@@ -1,30 +1,31 @@
 package com.tacocardgame.model;
 
-import java.util.ArrayList;
+public class User extends Player {
 
-public abstract class player {
+    public User(String name) {
+        this.name = name;
+    }
 
-    private List<Cards> cards = new ArrayList<>();
-
+    @Override
     public static void playerSays() {
 
     }
 
-    public static void displayCard() {
-
-    }
-
+    @Override
     public static void playerChecks() {
 
     }
 
+    @Override
     public static void playerWaits() {
 
     }
 
+    @Override
     public static void playerSlaps() {
 
     }
+
 
 
 }

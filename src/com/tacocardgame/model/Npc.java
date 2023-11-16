@@ -1,20 +1,11 @@
 package com.tacocardgame.model;
 
-public class npc extends player {
+public class Npc extends Player {
 
     private String name;
 
-    public npc(String name) {
-        this.name = name;
-    }
-
     @Override
     public static void playerSays() {
-
-    }
-
-    @Override
-    public static void displayCard() {
 
     }
 
