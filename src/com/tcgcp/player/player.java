@@ -1,6 +1,10 @@
 package com.tcgcp.player;
 
+import java.util.ArrayList;
+
 public abstract class player {
+
+    private List<Cards> cards = new ArrayList<>();
 
     public static void playerSays() {
 
