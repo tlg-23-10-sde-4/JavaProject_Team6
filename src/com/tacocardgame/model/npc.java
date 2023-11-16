@@ -1,4 +1,4 @@
-package com.tcgcp.player;
+package com.tacocardgame.model;
 
 public class npc extends player {
 
