@@ -24,7 +24,6 @@ public class Npc extends Player {
 
     @Override
     public static void playerSlaps() {
-        for
     }
 
     public void setName(String name) {

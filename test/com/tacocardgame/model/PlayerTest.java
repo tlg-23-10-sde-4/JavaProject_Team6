@@ -8,9 +8,15 @@ public class PlayerTest {
 
     @Test
     public void playerSays_shouldOutputCorrectResult() {
-//        new Player("test");
-//        String output = Player.playerSays()
-
+        Player player = new Player();
+        System.out.println("Should print, in order: Taco, Cat, Goat, Cheese, Pizza, Taco, Cat");
+        System.out.println(Player.playerSays() + " ");
+        System.out.print(Player.playerSays() + " ");
+        System.out.print(Player.playerSays() + " ");
+        System.out.print(Player.playerSays() + " ");
+        System.out.print(Player.playerSays() + " ");
+        System.out.print(Player.playerSays() + " ");
+        System.out.print(Player.playerSays() + " ");
     }
 
 }

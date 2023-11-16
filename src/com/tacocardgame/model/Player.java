@@ -6,9 +6,9 @@ import java.util.List;
 public class Player {
 
     // FIELDS
-    private List<String> tacoList = new ArrayList<>(
+    static List<String> tacoList = new ArrayList<>(
             List.of("TACO", "CAT", "GOAT", "CHEESE", "PIZZA"));
-    int tacoListCounter = 0;
+    static int tacoListCounter = 0;    // TODO: make sure this resets to 0 when a player loses a round
     private List<Card> playerHand = new ArrayList<>();
     private String name;
 
@@ -29,7 +29,7 @@ public class Player {
 
     // METHODS
 
-    public String playerSays() {
+    public static String playerSays() {
         // Player says next of "Taco, Cat, Goat, Cheese, Pizza"
         String result;
         if (tacoListCounter <= 3) {
