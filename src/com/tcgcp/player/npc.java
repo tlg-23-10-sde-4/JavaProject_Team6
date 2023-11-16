@@ -2,6 +2,12 @@ package com.tcgcp.player;
 
 public class npc extends player {
 
+    private String name;
+
+    public npc(String name) {
+        this.name = name;
+    }
+
     @Override
     public static void playerSays() {
 
@@ -25,6 +31,14 @@ public class npc extends player {
     @Override
     public static void playerSlaps() {
 
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getName() {
+        return this.name;
     }
 
 }
