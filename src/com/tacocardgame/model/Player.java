@@ -1,27 +1,34 @@
+
+
 package com.tacocardgame.model;
 
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-
 public class Player {
 
     // FIELDS
-    static final List<String> tacoList = new ArrayList<>(
-            List.of("TACO", "CAT", "GOAT", "CHEESE", "PIZZA"));
-    static int tacoListCounter = 0;    // TODO: make sure this resets to 0 when a player loses a round
-    private List<Card> playerHand = new ArrayList<>();  // TODO: implement methods to add the pile (switch to Deque?)
+    // static final List<String> tacoList = new ArrayList<>(  //consider making enum class
+    //        List.of("TACO", "CAT", "GOAT", "CHEESE", "PIZZA"));
+    // static int tacoListCounter = 0;    // TODO: (NEED TO DISCUSS) make sure this resets to 0 when a player loses a round
+    private List<Card> playerHand = new ArrayList<>();
     private String name;
-
+    private int playerId;
     // CONSTRUCTOR
 
     public Player() {
 
     }
 
-    public Player(String name) {
+    public Player(String name, int playerId) {
+        setName(name);
+        setPlayerId(playerId);
 
+    }
+
+    private void setPlayerId(int playerId) {
+        this.playerId = playerId;
     }
 
     public Player(String name, List<Card> playerHand) {
@@ -45,16 +52,12 @@ public class Player {
         return result;
     }
 
-    public Card playerFlipsCard() {
-        Card flipCard = this.playerHand.get(0);
-        this.playerHand.remove(0);
-        return flipCard;
+    public void playerFlipsCard() {
+        // Player takes player.playerHand(0) and turns it over into the pile
     }
 
     public void playerChecks() {
-        // if the spoken word and matches the flipped card
-        // the player can playerSlaps()
-        if (Player.playerSays())
+
     }
 
     public void playerWaits() {
