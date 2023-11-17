@@ -44,7 +44,7 @@ public class Player {
         return result;
     }
 
-    public void displayCard() {
+    public void playerFlipsCard() {
         // Player takes player.playerHand(0) and turns it over into the pile
     }
 
