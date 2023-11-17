@@ -1,12 +1,13 @@
 package com.tacocardgame.model;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class Player {
 
     // FIELDS
-    static List<String> tacoList = new ArrayList<>(
+    static final List<String> tacoList = new ArrayList<>(
             List.of("TACO", "CAT", "GOAT", "CHEESE", "PIZZA"));
     static int tacoListCounter = 0;    // TODO: make sure this resets to 0 when a player loses a round
     private List<Card> playerHand = new ArrayList<>();
@@ -29,7 +30,7 @@ public class Player {
 
     // METHODS
 
-    public static String playerSays() {
+    public static String playerSays() { // TODO: get rid of magic numbers
         // Player says next of "Taco, Cat, Goat, Cheese, Pizza"
         String result;
         if (tacoListCounter <= 3) {
@@ -43,21 +44,26 @@ public class Player {
         return result;
     }
 
-    public static void displayCard() {
+    public void playerFlipsCard() {
         // Player takes player.playerHand(0) and turns it over into the pile
     }
 
-    public  void playerChecks() {
+    public void playerChecks() {
 
     }
 
-    public static void playerWaits() {
+    public void playerWaits() {
 
     }
 
-    public static void playerSlaps() {
-
+    public Date playerSlaps() {
+        Date timeOfSlap = null;
+        // make it return the local time that the player slaps by default
+        // then override that in User returning the local time that the user does some action
+        return timeOfSlap;
     }
+
+
 
     // GETTERS & SETTERS
 
