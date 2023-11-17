@@ -5,17 +5,15 @@ import java.util.*;
 class Pile {
 
     // investigate Stack class (java.util)
-    private Deque<Card> pile = new ArrayDeque<>() {
-
-    };
+    private Deque<Card> pile = new ArrayDeque<>();
 
 
     public void addToPile(Card card) {
-        pile.push(card); // goes "on top" which means position 0
+        pile.push(card);
     }
 
     public Card showTopOfPile() {
-        return pile.peekFirst();   // shows the top of the pile
+        return pile.peekFirst();
     }
 
     public void clearPile() {
