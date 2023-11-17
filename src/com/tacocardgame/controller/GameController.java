@@ -1,19 +1,28 @@
 package com.tacocardgame.controller;
-
+import com.apps.util.Console;
+import com.apps.util.Prompter;
+import com.tacocardgame.model.Deck;
+import com.tacocardgame.model.Player;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class GameController {
-    private final Board board = Board.getInstance();
-    private final BoardView boardview = new BoardView(board);
     private Deck deck = new Deck();
     private Prompter prompter = new Prompter(new Scanner(System.in));
     private List<Player> players = new ArrayList<>();
-    private final int maxID = board.maxID();
 
+
+    public GameController(Deck deck, List<Player> players) {
+        this.deck = deck;
+        this.players = players;
+    }
 
     public void execute() {
         welcomeAndPromptForHelp();
-        showBoard();
         String playerName = promptForPlayerName();
         int playerCount = promptForPlayerCount();
 
@@ -23,11 +32,36 @@ public class GameController {
         playGame();
     }
 
+    private void distributeCards() {   // method that distributes cards to players from Deck #js
+    }
+
+    private void createPlayers(String playerName, int i) {  // method that creates players and player number #js
+        Player player = new Player();
+        player.setName(playerName);
+        players.add(player);  // still need method for player.add; #js
+    }
+
+
+    private void welcomeAndPromptForHelp() {
+        //SOUT with playerName from player.name() and ask if you want further instructions #js
+        //if no, proceed to start screen #js
+        //if yes, sout message: String welcomeBanner = Files.readString(Path.of("images/gameRules.txt"));
+
+    }
+    private String promptForPlayerName() {
+        String playerName = prompter.prompt("Please enter your name: ");
+        return playerName;
+    }
+    private int promptForPlayerCount() {
+        int playerCount = Integer.parseInt(prompter.prompt("How many players would you like to play? "));
+        return playerCount;
+    }
+
     private void playGame() {
         while (!gameOver()) {
             // do the thing
         }
-        announceWinner();
+        //announceWinner();  // when checkCard method shows a player's cards = 0
     }
 
     private boolean gameOver() {
@@ -42,28 +76,20 @@ public class GameController {
         return result;
     }
 
-    private int promptForPlayerName() {
-        String name = null;
-        boolean validInput = false;
-
-        while (!validInput) {
-            System.out.print("Please enter your name: ");
-            String input = scanner.nextLine().trim();
-
-            if (input.matches(".*\\d.*")) {
-                playerName = input;
-            }
-            else {
-                System.out.println("Entry name should only contain letters");
-            }
-        }
-        return playerName;
-    }
-
     private void welcome() {
-        System.out.println("              W E L C O M E  T O               ");
-        System.out.println("- - - -  - - -  - - - -  - - - - - -  - - - - -");
-        System.out.println("T a c o  C a t  G o a t  C h e e s e  P i z z a");
-        System.out.println("- - - -  - - -  - - - -  - - - - - -  - - - - -");
+        Console.clear();
+
+        try {
+            String welcomeBanner = Files.readString(Path.of("images/welcometo.txt"));
+            String welcomeBanner2 = Files.readString(Path.of("images/tcgcp.txt"));
+            prompter.info(welcomeBanner);
+            prompter.info(welcomeBanner2);
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        Console.blankLines(2);
     }
+}
 }
