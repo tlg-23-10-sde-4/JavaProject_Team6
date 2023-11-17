@@ -12,18 +12,17 @@ public class Npc extends Player {
         playerHand = getPlayerHand();
     }
 
-    @Override
     public void playerChecks() {
 
     }
 
-//    @Override
-    public static void playerWaits() {
+
+    public void playerWaits() {
 
     }
 
-//    @Override
-    public static void playerSlaps() {
+
+    public void playerSlaps() {
     }
 
     public void setName(String name) {
