@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/../../IntmJ/workspace/DuckRace/DuckRace.iml" filepath="$PROJECT_DIR$/../../IntmJ/workspace/DuckRace/DuckRace.iml" />
       <module fileurl="file://$PROJECT_DIR$/JavaProject_Team6.iml" filepath="$PROJECT_DIR$/JavaProject_Team6.iml" />
     </modules>
   </component>
