@@ -1,6 +1,7 @@
 package com.tacocardgame.model;
 
 public class User extends Player {
+    private String name;
 
     public User(String name) {
         this.name = name;
