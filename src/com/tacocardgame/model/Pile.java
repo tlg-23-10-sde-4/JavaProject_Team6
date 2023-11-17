@@ -1,24 +1,24 @@
 package com.tacocardgame.model;
 
-import com.tacocardgame.model.Card;
-
-import java.util.Stack;
+import java.util.*;
 
 class Pile {
 
     // investigate Stack class (java.util)
-    private Stack<Card> cards = new Stack<>();
+    private Deque<Card> pile = new ArrayDeque<>() {
+
+    };
 
 
     public void addToPile(Card card) {
-        cards.add(card); // goes "on top" which means position 0
+        pile.push(card); // goes "on top" which means position 0
     }
 
     public Card showTopOfPile() {
-        return cards.get(0);
+        return pile.peekFirst();   // shows the top of the pile
     }
 
     public void clearPile() {
-        cards.clear();
+        pile.clear();
     }
 }

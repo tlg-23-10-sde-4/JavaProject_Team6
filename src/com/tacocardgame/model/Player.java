@@ -4,13 +4,14 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+
 public class Player {
 
     // FIELDS
     static final List<String> tacoList = new ArrayList<>(
             List.of("TACO", "CAT", "GOAT", "CHEESE", "PIZZA"));
     static int tacoListCounter = 0;    // TODO: make sure this resets to 0 when a player loses a round
-    private List<Card> playerHand = new ArrayList<>();
+    private List<Card> playerHand = new ArrayList<>();  // TODO: implement methods to add the pile (switch to Deque?)
     private String name;
 
     // CONSTRUCTOR
@@ -44,14 +45,16 @@ public class Player {
         return result;
     }
 
-    public Card playerFlipsCard(Player player) {
+    public Card playerFlipsCard() {
         Card flipCard = this.playerHand.get(0);
         this.playerHand.remove(0);
         return flipCard;
     }
 
     public void playerChecks() {
-
+        // if the spoken word and matches the flipped card
+        // the player can playerSlaps()
+        if (Player.playerSays())
     }
 
     public void playerWaits() {
