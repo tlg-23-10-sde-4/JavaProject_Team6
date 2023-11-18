@@ -13,4 +13,8 @@ public class Card {
     public void show() {
         System.out.println(image);
     }
+
+    public String getName() {       //get name of card in middlecard obj
+        return name;
+    }
 }
