@@ -1,8 +1,8 @@
 package com.tacocardgame.controller;
 import com.apps.util.Console;
 import com.apps.util.Prompter;
-import com.tacocardgame.model.Deck;
-import com.tacocardgame.model.Player;
+import com.tacocardgame.model.*;
+import com.tacocardgame.view.*;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -27,8 +27,8 @@ public class GameController {
         int playerCount = promptForPlayerCount();
 
         createPlayers(playerName, playerCount - 1);
-        distributeCards();
 
+        distributeCards();  //distribute cards evenly amongst players
         playGame();
     }
 
@@ -38,7 +38,7 @@ public class GameController {
     private void createPlayers(String playerName, int i) {  // method that creates players and player number #js
         Player player = new Player();
         player.setName(playerName);
-        players.add(player);  // still need method for player.add; #js
+        players.add(player);  // still need method for player.add; #js //updateName in Board #kp
     }
 
 
@@ -57,12 +57,51 @@ public class GameController {
         return playerCount;
     }
 
+    /*
+     *  Below is generic map of playGame().  Time during slap environment needs to be added.
+     *  Maybe look at System.currentTimeMillis() for round timing???
+     */
+
     private void playGame() {
-        while (!gameOver()) {
-            // do the thing
+        Card middleCard = deck.nextCard();
+        boolean gameWon = false;
+
+        while (!gameWon) {
+            for (Player currentPlayer : players) {
+                String spokenWord = currentPlayer.playerSays();
+                System.out.println(currentPlayer.getName() + " says: " + spokenWord);
+
+                if (spokenWord.equalsIgnoreCase(middleCard.getName())) {
+                    // Players race to slap hands on the cards
+                    boolean lastPlayerSlapped = false;
+                    for (Player player : players) {
+                        if (player != currentPlayer) {
+                            System.out.println(player.getName() + " slaps!");
+                            lastPlayerSlapped = true;
+                        }
+                    }
+
+                    if (!lastPlayerSlapped) {
+                        System.out.println(currentPlayer.getName() + " is the last to slap!");
+                        currentPlayer.addCardsToPlayerHand(deck.getMiddleStack());
+                    }
+
+                    // reset the middle stack
+                    deck.clearPile();
+                }
+            }
+
+            // Check if any player has won
+            for (Player player : players) {
+                if (player.getPlayerHand().isEmpty()) {
+                    System.out.println(player.getName() + " wins the game!");   //announceWinner(); when checkCard method shows a player's cards = 0
+                    gameWon = true;
+                }
+            }
         }
-        //announceWinner();  // when checkCard method shows a player's cards = 0
     }
+
+
 
     private boolean gameOver() {
         boolean result = false;

@@ -71,6 +71,9 @@ public class Player {
         return timeOfSlap;
     }
 
+    public void addCardsToPlayerHand(List<Card> cards) {
+        playerHand.addAll(cards);
+    }
 
 
     // GETTERS & SETTERS

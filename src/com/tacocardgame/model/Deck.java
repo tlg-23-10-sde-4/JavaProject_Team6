@@ -7,6 +7,20 @@ import java.util.*;
 
 public class Deck {
     private List<Card> allCards = new ArrayList<>();
+    private List<Card> middleStack = new ArrayList<>();  // middle pile list
+
+    /*
+     * Adding NewDeck() method to initialize and shuffle
+     * ONLY until the below method Deck() is finished
+     */
+    public NewDeck() {
+        allCards.add(new Card("Taco"));    //ctor edits needed if used
+        allCards.add(new Card("Cat"));
+        allCards.add(new Card("Goat"));
+        allCards.add(new Card("Cheese"));
+        allCards.add(new Card("Pizza"));
+    }
+
 
     // if 4, create 48 cards
     // if 5, create 55 cards
@@ -27,14 +41,28 @@ public class Deck {
                 // do this 5 times,put this line below in a for loop 1-5
                 allCards.add(new Card(entry.getKey(), entry.getValue()));
             }
-
             Collections.shuffle(allCards);
         } catch (IOException e) {
             System.out.println(e);
         }
     }
 
-    public Card nextCard() {
-        return allCards.remove(0);
+    private void shuffleDeck() {
+        Collections.shuffle(allCards);
     }
+
+    public Card nextCard() {
+        Card card = allCards.remove(0);
+        middleStack.add(card);  // adds the drawn card to the middle stack
+        return card;
+    }
+
+    public List<Card> getMiddleStack() {
+        return middleStack;
+    }
+
+    public void clearPile() {
+        middleStack.clear();
+    }
+
 }
