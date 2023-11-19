@@ -14,18 +14,19 @@ import static org.junit.Assert.*;
 
 public class PlayerTest {
 
-    @Before
-    public void initialize() throws IOException {
-        Deck deck = new Deck();
-        Pile pile = new Pile();
-        Card taco = new Card(TACO);
-        Card cat = new Card(CAT);
-        Card goat = new Card(GOAT);
-        Card cheese = new Card(CHEESE);
-        Card pizza = new Card(PIZZA);
-        ArrayList<Card> playerHand = new ArrayList<>(Arrays.asList(taco, cat, goat, cheese, pizza, taco));
+    Pile pile = new Pile();
+    Card taco = new Card(TACO);
+    Card cat = new Card(CAT);
+    Card goat = new Card(GOAT);
+    Card cheese = new Card(CHEESE);
+    Card pizza = new Card(PIZZA);
+    private ArrayList<Card> playerHand;
+    Player tom;
 
-        User tom = new User("Tom", 3, (playerHand));
+    @Before
+    public void initialize() {
+        playerHand = new ArrayList<>(Arrays.asList(taco, cat, goat, cheese, pizza, taco));
+        tom = new Player("Tom", 3, (playerHand));
     }
 
 
@@ -49,17 +50,29 @@ public class PlayerTest {
     }
 
     @Test
-    public void getPlayerHand_shouldReturnThePlayerHand() {
-        Card taco = new Card(TACO);
-        Card cat = new Card(CAT);
-        Card goat = new Card(GOAT);
-        Card cheese = new Card(CHEESE);
-        Card pizza = new Card(PIZZA);
-        ArrayList<Card> playerHand = new ArrayList<>(Arrays.asList(taco, cat, goat, cheese, pizza, taco));
-        Player tom = new Player ("Tom", 3, playerHand);
+    public void getPlayerHand_shouldReturnThePlayerHand() { // Also tests setPlayerHand()
         for (Card card : playerHand) {
             System.out.println(card.getType());
         }
     }
+
+    @Test
+    public void playerFlipsCard_shouldReturnTheCardAtPosition0AndDecrementTheHand() {
+        System.out.print("Player hand BEFORE the flip: ");
+        for (Card card : playerHand) {
+            System.out.print(card.getType() + " ");
+        }
+        System.out.println("\n");
+        System.out.print("Flipped card: ");
+        Card card = tom.playerFlipsCard();
+        System.out.print(card.getType() + "\n");
+
+        System.out.print("Player hand AFTER the flip: ");
+        for (Card card1 : playerHand) {
+            System.out.print(card1.getType() + " ");
+        }
+    }
+
+
 
 }
