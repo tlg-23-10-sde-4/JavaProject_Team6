@@ -13,6 +13,7 @@ public class User extends Player {
         setPlayerHand(playerHand);
     }
 
+    // intent is to capture the exact time of the user's slap (pressing spacebar) for comparison to the Npc Players
     @Override
     public Date playerSlaps() {
         Date result = null;

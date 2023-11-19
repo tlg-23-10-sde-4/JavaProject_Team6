@@ -21,8 +21,9 @@ public class Npc extends Player {
         //TODO: I'm sure there's a better way to pass a random long to this.wait()
         long waitTime = Math.round(doubleWaitTime); // converts the double to long
 
-        this.wait(waitTime);    // makes the player wait before slapping
-        // the time - down to milliseconds - of the player slap
+        this.wait(waitTime);    // this. to make sure each Npc Player has their own wait time
+
+        // the time - down to milliseconds - of the Npc Player slap
         // SHOULD!!! happen after the wait as the code is read sequentially
         Date result = new Date();
 
