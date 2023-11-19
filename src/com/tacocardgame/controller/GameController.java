@@ -16,7 +16,7 @@ public class GameController {
     private List<Player> players = new ArrayList<>();
 
 
-    public GameController(Deck deck, List<Player> players) {
+    public GameController(Deck deck, List<Player> players) throws IOException {
         this.deck = deck;
         this.players = players;
     }
