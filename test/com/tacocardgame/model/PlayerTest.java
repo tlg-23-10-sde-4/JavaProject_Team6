@@ -3,14 +3,10 @@ package com.tacocardgame.model;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.io.IOException;
-import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 
 import static com.tacocardgame.model.CardType.*;
-import static org.junit.Assert.*;
 
 public class PlayerTest {
 
@@ -21,32 +17,26 @@ public class PlayerTest {
     Card cheese = new Card(CHEESE);
     Card pizza = new Card(PIZZA);
     private ArrayList<Card> playerHand;
-    Player tom;
+    Player player;
 
     @Before
     public void initialize() {
         playerHand = new ArrayList<>(Arrays.asList(taco, cat, goat, cheese, pizza, taco));
-        tom = new Player("Tom", 3, (playerHand));
+        player = new Player("player", 3, (playerHand));
     }
 
 
     @Test
     public void playerSays_shouldOutputCorrectResult() {
-        System.out.println("Should print, in order: \nTACO CAT GOAT CHEESE PIZZA");
-        for (int i = 0; i < 5; i++)
+        System.out.println("Should print, in order: \nTACO CAT GOAT CHEESE PIZZA Something is wrong...");
+        for (int i = 0; i < 6; i++)
         System.out.print(Player.playerSays(i) + " ");
     }
 
     @Test
-    public void getName_shouldReturnNamePlayerName() {
-        Player tom = new Player("Tom", 3);
-        System.out.println(tom.getName());
-    }
-
-    @Test
-    public void getPlayerID_shouldReturnPlayerID() {
-        Player tom = new Player ("Tom", 3);
-        System.out.println(tom.getPlayerId());
+    public void setName_shouldReturnCorrectPlayerName() {
+        player.setName("Tom");
+        System.out.println(player.getName());
     }
 
     @Test
@@ -64,10 +54,30 @@ public class PlayerTest {
         }
         System.out.println("\n");
         System.out.print("Flipped card: ");
-        Card card = tom.playerFlipsCard();
+        Card card = player.playerFlipsCard();
         System.out.print(card.getType() + "\n");
 
         System.out.print("Player hand AFTER the flip: ");
+        for (Card card1 : playerHand) {
+            System.out.print(card1.getType() + " ");
+        }
+    }
+
+    @Test
+    public void playerSlaps_shouldBeNull() throws InterruptedException {    // Method overridden in both subclasses
+        System.out.println(player.playerSlaps());
+    }
+
+    @Test
+    public void addCardsToPlayerHand_shouldAddTheSelectedCardsToBottomOfPlayerHand() {
+        ArrayList<Card> pile = new ArrayList<>(Arrays.asList(pizza, cheese, goat, cat, taco));
+        System.out.print("Player hand BEFORE adding cards: ");
+        for (Card card : playerHand) {
+            System.out.print(card.getType() + " ");
+        }
+        System.out.println("\n");
+        player.addCardsToPlayerHand(pile);
+        System.out.print("Player hand AFTER adding cards: ");
         for (Card card1 : playerHand) {
             System.out.print(card1.getType() + " ");
         }

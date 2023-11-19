@@ -23,7 +23,6 @@ public class Player {
 
     }
 
-    // TODO: does the player have a <playerHand> filled with cards? If yes, then we need a constructor for it
     public Player(String name, int playerId) {
         setName(name);
         setPlayerId(playerId);
@@ -37,7 +36,7 @@ public class Player {
 
     // METHODS
 
-    public Card playerFlipsCard() {
+    public Card playerFlipsCard() { // CJ: test successful 11/19
         Card result;
 
         result = playerHand.get(0);
@@ -46,7 +45,7 @@ public class Player {
         return result;
     }
 
-    public static String playerSays(int position) {
+    public static String playerSays(int position) { // CJ: test successful 11/19
         CardType cardType = CardType.findByPosition(position);
         if (cardType != null) {
             return cardType.getLabel();
