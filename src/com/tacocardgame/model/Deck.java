@@ -1,68 +1,54 @@
 package com.tacocardgame.model;
 
+package com.tacocardgame.model;
+
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.*;
+import java.util.NoSuchElementException;
 
 public class Deck {
     private List<Card> allCards = new ArrayList<>();
-    private List<Card> middleStack = new ArrayList<>();  // middle pile list
 
-    /*
-     * Adding NewDeck() method to initialize and shuffle
-     * ONLY until the below method Deck() is finished
-     */
-    public NewDeck() {
-        allCards.add(new Card("Taco"));    //ctor edits needed if used
-        allCards.add(new Card("Cat"));
-        allCards.add(new Card("Goat"));
-        allCards.add(new Card("Cheese"));
-        allCards.add(new Card("Pizza"));
-    }
+    public Deck() throws IOException {
 
 
-    // if 4, create 48 cards
-    // if 5, create 55 cards
-    // create 55 - (55 % playerCount) cards
-    // e.g., 55 % 4 = 7, so (55-7) cards; 55 % 3 = 1, so (55-1) cards; 55 % 5 = 0, so (55-0) cards
-    public Deck(int playerCount) throws IOException {   // TODO: fix up the exception handling
-        try {
-            Map<String, String> nameImageMap = new HashMap<>(); // aren't all the .put() functions just overwriting each other?
-            nameImageMap.put("taco", Files.readString(Path.of("images/taco.txt")));
-            nameImageMap.put("cat", Files.readString(Path.of("images/cat.txt")));
-            nameImageMap.put("goat", Files.readString(Path.of("images/goat.txt")));
-            nameImageMap.put("cheese", Files.readString(Path.of("images/cheese.txt")));
-            nameImageMap.put("pizza", Files.readString(Path.of("images/pizza.txt")));
-            // or use Map.of()
-            // and likewise for "goat", Files.readString(...goat...);
+        try {  // CJ to answer your question about over-right.  Great question.  Since it's a map there's a key,value pair.
+            // it would only over-write if the keys were the same.
 
-            for (var entry : nameImageMap.entrySet()) {
-                // do this 5 times,put this line below in a for loop 1-5
-                allCards.add(new Card(entry.getKey(), entry.getValue()));
+            //We create the initial array by assigning it to a Map.
+
+            Map<String, String> nameTacoMap = new HashMap<>();
+            nameImageMap.put("taco", Files.readString(Path.of("resources/images/taco.txt")));
+            nameImageMap.put("cat", Files.readString(Path.of("resources/images/cat.txt")));
+            nameImageMap.put("goat", Files.readString(Path.of("resources/images/goat.txt")));
+            nameImageMap.put("cheese", Files.readString(Path.of("resources/images/cheese.txt")));
+            nameImageMap.put("pizza", Files.readString(Path.of("resources/images/pizza.txt")));
+
+
+
+            for (var entry : nameTacoMap.entrySet()) {
+                for (int i = 0; i < 11; i++) { // Create 11 cards of each type
+                    allCards.add(new Card(entry.getKey(), entry.getValue()));
+                }
             }
             Collections.shuffle(allCards);
         } catch (IOException e) {
-            System.out.println(e);
+            e.printStackTrace();
         }
     }
 
-    private void shuffleDeck() {
-        Collections.shuffle(allCards);
-    }
-
     public Card nextCard() {
-        Card card = allCards.remove(0);
-        middleStack.add(card);  // adds the drawn card to the middle stack
-        return card;
+        //
+        if (allCards.isEmpty()) {
+            throw new NoSuchElementException("The Deck is empty");
+        }
+
+        List<Card> temp = new ArrayList<>();
+        temp.add(allCards.get(0));
+        allCards.remove(0);
+
+        return temp.get(0);
     }
 
-    public List<Card> getMiddleStack() {
-        return middleStack;
-    }
-
-    public void clearPile() {
-        middleStack.clear();
-    }
-
-}
