@@ -29,6 +29,12 @@ public class Player {
         setPlayerId(playerId);
     }
 
+    public Player(String name, int playerId, List<> playerHand) {
+        setName(name);
+        setPlayerId(playerId);
+        setPlayerHand(playerHand);
+    }
+
     // METHODS
 
     public Card playerFlipsCard() {
@@ -46,7 +52,7 @@ public class Player {
             return cardType.getLabel();
         }
         else {
-            return "Something is wrong with Player.getPlayerSays";
+            return "Something is wrong with Player.playerSays";
         }
     }
 

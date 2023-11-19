@@ -2,11 +2,11 @@ package com.tacocardgame.model;
 
 public class Card {
 
-    private String name;
+    private CardType type;
     private String image;
 
-    public Card(String name, String image) {
-        this.name = name;
+    public Card(CardType type, String image) {
+        this.type = type;
         this.image = image;
     }
 
@@ -14,7 +14,7 @@ public class Card {
         System.out.println(image);
     }
 
-    public String getName() {       //get name of card in middlecard obj
-        return name;
+    public CardType getType() {       //get name of card in middlecard obj
+        return type;
     }
 }
