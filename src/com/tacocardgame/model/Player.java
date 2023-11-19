@@ -18,11 +18,12 @@ public class Player {
 
     // CONSTRUCTOR
 
+    // probably only need one constructor
     public Player() {
 
     }
 
-    // Why did we get rid of the constructor with playerHand?
+    // TODO: does the player have a <playerHand> filled with cards? If yes, then we need a constructor for it
     public Player(String name, int playerId) {
         setName(name);
         setPlayerId(playerId);
