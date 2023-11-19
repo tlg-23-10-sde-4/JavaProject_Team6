@@ -104,5 +104,14 @@ public class Player {
         this.playerId = playerId;
     }
 
+    public static String getPlayerSays(int position) {
+        CardType cardType = CardType.findByPosition(position);
+        if (cardType != null) {
+            return cardType.getLabel();
+        }
+        else {
+            return "Something is wrong with Player.getPlayerSays";
+        }
+    }
 
 }
