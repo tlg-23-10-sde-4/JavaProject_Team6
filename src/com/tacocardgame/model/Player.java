@@ -31,7 +31,7 @@ public class Player {
         this.playerId = playerId;
     }
 
-    public Player(String name, List<Card> playerHand) {
+    public createPlayer(String name, List<Card> playerHand) {
         setName(name);
         setPlayerHand(playerHand);
     }
