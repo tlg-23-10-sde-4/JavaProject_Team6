@@ -93,7 +93,7 @@ public class GameController {
 
             // Check if any player has won
             for (Player player : players) {
-                if (player.getPlayerHand().isEmpty()) {
+                if (player.getPlayerHand().isEmpty()) { // much simpler than creating a hasNoCards() method
                     System.out.println(player.getName() + " wins the game!");   //announceWinner(); when checkCard method shows a player's cards = 0
                     gameWon = true;
                 }
