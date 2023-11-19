@@ -40,6 +40,16 @@ public class Player {
         return result;
     }
 
+    public static String playerSays(int position) {
+        CardType cardType = CardType.findByPosition(position);
+        if (cardType != null) {
+            return cardType.getLabel();
+        }
+        else {
+            return "Something is wrong with Player.getPlayerSays";
+        }
+    }
+
     public void playerChecks() {    // What is the player checking here?
         // If we're checking for a match between playerFlipsCard and playerSays
         // I think that's better compared in GameController or Round
@@ -63,13 +73,8 @@ public class Player {
 //                while (player.getPlayerHand().isEmpty()) == false);
     }
 
-    public void playerWaits() { // Waits for what?
-    }
-
     public Date playerSlaps() throws InterruptedException {
         Date timeOfSlap = null;
-        // make it return the local time that the player slaps by default
-        // then override that in User returning the local time that the user does some action
         return timeOfSlap;
     }
 
@@ -103,6 +108,5 @@ public class Player {
     public void setPlayerId(int playerId) {
         this.playerId = playerId;
     }
-
 
 }

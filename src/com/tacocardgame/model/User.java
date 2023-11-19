@@ -24,8 +24,4 @@ public class User extends Player {
         return result;
     }
 
-
-
-
-
 }
