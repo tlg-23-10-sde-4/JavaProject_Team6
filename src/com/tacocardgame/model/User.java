@@ -7,22 +7,12 @@ import java.util.Scanner;
 public class User extends Player {
 
 
-
+    // TODO: we have a mismatch here between this constructor and the Player constructor which has id
     public User(String name, List playerHand) {
         setName(name);
         setPlayerHand(playerHand);
     }
 
-//    @Override
-//    public void playerChecks() {
-//
-//    }
-//
-//    @Override
-//    public void playerWaits() {
-//
-//    }
-//
     @Override
     public Date playerSlaps() {
         Date result = null;

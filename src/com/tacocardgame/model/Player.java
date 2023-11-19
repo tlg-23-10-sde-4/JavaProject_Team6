@@ -43,19 +43,23 @@ public class Player {
         // If we're checking for a match between playerFlipsCard and playerSays
         // I think that's better compared in GameController or Round
         // e.g.
-        // for (int i = 0; i < 3; i++) {
-        //
-        //          currentCard = valueOf(players(i).playerFlipsCard());
-        //          currentSays = players(i).playerSays();
-        //      if (currentCard = currentSays) {
-        //          initiate slap environment
-        //      }
-        //      else {
-        //          i++;
-        //      }
-        //
-
-
+//              int i = 0;
+//                do {
+//                    currentCard = valueOf(players(i).playerFlipsCard());
+//                    currentSays = players(i).playerSays();
+//                    if (currentCard.equals(currentSays)) {
+//                        //for (Player player : players)
+//                            playerSlaps();
+//                        ?break?
+//                    }
+//                    else {
+//                        i++;
+//                    }     // returns to the top of the "do" statement but with i incremented
+//                    if (i == 5) {   // <players> has 0-4; if i == 5 then reset to 0, thus completing the circle
+//                        i = 0;
+//                    }
+//                }
+//                while (player.getPlayerHand().isEmpty()) == false);
     }
 
     public void playerWaits() { // Waits for what?
