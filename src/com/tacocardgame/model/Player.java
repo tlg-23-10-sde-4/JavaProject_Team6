@@ -87,7 +87,6 @@ public class Player {
         playerHand.addAll(cards);
     }
 
-
     // GETTERS & SETTERS
 
     public void setName(String name) {
