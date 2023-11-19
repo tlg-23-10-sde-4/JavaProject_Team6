@@ -63,13 +63,8 @@ public class Player {
 //                while (player.getPlayerHand().isEmpty()) == false);
     }
 
-    public void playerWaits() { // Waits for what?
-    }
-
     public Date playerSlaps() throws InterruptedException {
         Date timeOfSlap = null;
-        // make it return the local time that the player slaps by default
-        // then override that in User returning the local time that the user does some action
         return timeOfSlap;
     }
 
