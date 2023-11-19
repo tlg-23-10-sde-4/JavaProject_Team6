@@ -21,7 +21,6 @@ public class User extends Player {
         if (playerSlap.equals(" ")) {   // when player presses spacebar, playerSlaps() returns the time of that press.
             result = new Date();
         }
-
         return result;
     }
 
