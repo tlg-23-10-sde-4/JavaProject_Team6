@@ -8,9 +8,14 @@ public class Npc extends Player {
 
     private String name;
 
-    // TODO: we have a mismatch here between this constructor and the Player constructor which has id
-    public Npc(String name, List playerHand) {
+    public Npc(String name, int playerID) {
         getName();
+        getPlayerId();
+    }
+
+    public Npc(String name, int playerID, List<Card> playerHand) {
+        getName();
+        getPlayerId();
         playerHand = getPlayerHand();
     }
 

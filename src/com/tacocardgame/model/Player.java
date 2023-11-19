@@ -12,7 +12,7 @@ public class Player {
     // static final List<String> tacoList = new ArrayList<>(  //consider making enum class
     //        List.of("TACO", "CAT", "GOAT", "CHEESE", "PIZZA"));
     // static int tacoListCounter = 0;    // TODO: (NEED TO DISCUSS) make sure this resets to 0 when a player loses a round
-    private List<Card> playerHand = new ArrayList<>();
+    private ArrayList<Card> playerHand = new ArrayList<>();
     private String name;
     private int playerId;
 
@@ -23,13 +23,12 @@ public class Player {
 
     }
 
-    // TODO: does the player have a <playerHand> filled with cards? If yes, then we need a constructor for it
     public Player(String name, int playerId) {
         setName(name);
         setPlayerId(playerId);
     }
 
-    public Player(String name, int playerId, List<> playerHand) {
+    public Player(String name, int playerId, ArrayList<Card> playerHand) {
         setName(name);
         setPlayerId(playerId);
         setPlayerHand(playerHand);
@@ -37,7 +36,7 @@ public class Player {
 
     // METHODS
 
-    public Card playerFlipsCard() {
+    public Card playerFlipsCard() { // CJ: test successful 11/19
         Card result;
 
         result = playerHand.get(0);
@@ -46,7 +45,7 @@ public class Player {
         return result;
     }
 
-    public static String playerSays(int position) {
+    public static String playerSays(int position) { // CJ: test successful 11/19
         CardType cardType = CardType.findByPosition(position);
         if (cardType != null) {
             return cardType.getLabel();
@@ -99,11 +98,11 @@ public class Player {
         return this.name;
     }
 
-    public List<Card> getPlayerHand() {
+    public ArrayList<Card> getPlayerHand() {
         return playerHand;
     }
 
-    public void setPlayerHand(List<Card> playerHand) {
+    public void setPlayerHand(ArrayList<Card> playerHand) {
         this.playerHand = playerHand;
     }
 

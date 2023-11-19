@@ -1,9 +1,5 @@
 package com.tacocardgame.model;
 
-package com.tacocardgame.model;
-
-package com.tacocardgame.model;
-
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -21,12 +17,12 @@ public class Deck {
 		
 		//We create the initial array by assigning it to a Map.   
 		
-            Map<String, String> nameTacoMap = new HashMap<>(); 
-            nameImageMap.put("taco", Files.readString(Path.of("resources/images/taco.txt")));
-            nameImageMap.put("cat", Files.readString(Path.of("resources/images/cat.txt")));
-            nameImageMap.put("goat", Files.readString(Path.of("resources/images/goat.txt")));
-            nameImageMap.put("cheese", Files.readString(Path.of("resources/images/cheese.txt")));
-            nameImageMap.put("pizza", Files.readString(Path.of("resources/images/pizza.txt")));
+            Map<CardType, String> nameTacoMap = new HashMap<>();
+            nameTacoMap.put(CardType.TACO, Files.readString(Path.of("resources/images/taco.txt")));
+            nameTacoMap.put(CardType.CAT, Files.readString(Path.of("resources/images/cat.txt")));
+            nameTacoMap.put(CardType.GOAT, Files.readString(Path.of("resources/images/goat.txt")));
+            nameTacoMap.put(CardType.CHEESE, Files.readString(Path.of("resources/images/cheese.txt")));
+            nameTacoMap.put(CardType.PIZZA, Files.readString(Path.of("resources/images/pizza.txt")));
 
 			
 		
@@ -42,15 +38,16 @@ public class Deck {
     }
 
     public Card nextCard() {
-    //
-	if (allCards.isEmpty()) {
-        throw new NoSuchElementException("The Deck is empty");
+        //
+        if (allCards.isEmpty()) {
+            throw new NoSuchElementException("The Deck is empty");
+        }
+
+        List<Card> temp = new ArrayList<>();
+        temp.add(allCards.get(0));
+        allCards.remove(0);
+
+        return temp.get(0);
     }
-
-    List<Card> temp = new ArrayList<>();
-    temp.add(allCards.get(0));
-    allCards.remove(0);
-
-    return temp.get(0);
 }
 
