@@ -21,7 +21,7 @@ public class Deck {
 		
 		//We create the initial array by assigning it to a Map.   
 		
-            Map<String, String> nameTacoMap = new HashMap<>(); 
+            Map<CardType, String> nameTacoMap = new HashMap<>();
             nameImageMap.put("taco", Files.readString(Path.of("resources/images/taco.txt")));
             nameImageMap.put("cat", Files.readString(Path.of("resources/images/cat.txt")));
             nameImageMap.put("goat", Files.readString(Path.of("resources/images/goat.txt")));
