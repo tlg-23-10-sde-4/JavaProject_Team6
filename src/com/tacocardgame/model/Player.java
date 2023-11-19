@@ -15,56 +15,53 @@ public class Player {
     private List<Card> playerHand = new ArrayList<>();
     private String name;
     private int playerId;
+
     // CONSTRUCTOR
 
     public Player() {
 
     }
 
+    // Why did we get rid of the constructor with playerHand?
     public Player(String name, int playerId) {
         setName(name);
         setPlayerId(playerId);
-
-    }
-
-    private void setPlayerId(int playerId) {
-        this.playerId = playerId;
-    }
-
-    public createPlayer(String name, List<Card> playerHand) {
-        setName(name);
-        setPlayerHand(playerHand);
     }
 
     // METHODS
 
-    public static String playerSays() { // TODO: get rid of magic numbers
-        // Player says next of "Taco, Cat, Goat, Cheese, Pizza"
-        String result;
-        if (tacoListCounter <= 3) {
-            result = tacoList.get(tacoListCounter);
-            tacoListCounter++;
-        }
-        else {
-            result = tacoList.get(4);
-            tacoListCounter = 0;
-        }
+    public Card playerFlipsCard() {
+        Card result;
+
+        result = playerHand.get(0);
+        playerHand.remove(0);
+
         return result;
     }
 
-    public void playerFlipsCard() {
-        // Player takes player.playerHand(0) and turns it over into the pile
+    public void playerChecks() {    // What is the player checking here?
+        // If we're checking for a match between playerFlipsCard and playerSays
+        // I think that's better compared in GameController or Round
+        // e.g.
+        // for (int i = 0; i < 3; i++) {
+        //
+        //          currentCard = valueOf(players(i).playerFlipsCard());
+        //          currentSays = players(i).playerSays();
+        //      if (currentCard = currentSays) {
+        //          initiate slap environment
+        //      }
+        //      else {
+        //          i++;
+        //      }
+        //
+
+
     }
 
-    public void playerChecks() {
-
+    public void playerWaits() { // Waits for what?
     }
 
-    public void playerWaits() {
-
-    }
-
-    public Date playerSlaps() {
+    public Date playerSlaps() throws InterruptedException {
         Date timeOfSlap = null;
         // make it return the local time that the player slaps by default
         // then override that in User returning the local time that the user does some action
@@ -92,6 +89,14 @@ public class Player {
 
     public void setPlayerHand(List<Card> playerHand) {
         this.playerHand = playerHand;
+    }
+
+    public int getPlayerId() {
+        return playerId;
+    }
+
+    public void setPlayerId(int playerId) {
+        this.playerId = playerId;
     }
 
 
