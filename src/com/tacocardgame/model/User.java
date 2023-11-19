@@ -1,15 +1,21 @@
 package com.tacocardgame.model;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Scanner;
 
 public class User extends Player {
+    List<Card> playerHand;
 
-
-    // TODO: we have a mismatch here between this constructor and the Player constructor which has id
-    public User(String name, List playerHand) {
+    public User(String name, int playerId) {
         setName(name);
+        setPlayerId(playerId);
+    }
+
+    public User(String name, int playerId, ArrayList<Card> playerHand) {
+        setName(name);
+        setPlayerId(playerId);
         setPlayerHand(playerHand);
     }
 
