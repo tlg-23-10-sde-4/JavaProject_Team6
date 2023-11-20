@@ -16,6 +16,8 @@ public class Player {
     private String name;
     private int playerId;
 
+    private boolean isUser;
+
     // CONSTRUCTOR
 
     // probably only need one constructor
@@ -26,6 +28,7 @@ public class Player {
     public Player(String name, int playerId) {
         setName(name);
         setPlayerId(playerId);
+        this.isUser = (playerId == 1);
     }
 
     public Player(String name, int playerId, ArrayList<Card> playerHand) {
@@ -113,4 +116,11 @@ public class Player {
         this.playerId = playerId;
     }
 
+    public boolean isUser() {
+        return isUser;
+    }
+
+    public void setUser(boolean isUser) {
+        this.isUser = isUser;
+    }
 }
