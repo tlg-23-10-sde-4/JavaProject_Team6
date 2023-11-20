@@ -62,11 +62,6 @@ public class GameController {
         return playerName;
     }
 
-    private int promptForPlayerCount() {
-        int playerCount = Integer.parseInt(prompter.prompt("How many players would you like to play? "));
-        return playerCount;
-    }
-
     /*
      *  Below is generic map of playGame().  Time during slap environment needs to be added.
      *  Maybe look at System.currentTimeMillis() for round timing???

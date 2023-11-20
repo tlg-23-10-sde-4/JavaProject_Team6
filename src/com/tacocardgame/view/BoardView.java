@@ -31,7 +31,5 @@ public class BoardView {
                 display.append(row);
             }
         }
-        display.append("\n");
-        System.out.println(display);
     }
 }
