@@ -5,6 +5,7 @@ package com.tacocardgame.model;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.NoSuchElementException;
 
 public class Player {
 
@@ -39,21 +40,24 @@ public class Player {
 
     // METHODS
 
-    public Card playerFlipsCard() { // CJ: test successful 11/19
-        Card result;
-
-        result = playerHand.get(0);
-        playerHand.remove(0);
-
-        return result;
+    // CJ: test successful 11/19  # JS- I changed playerFlipsCard to dec&inc card
+    //# JS- need to retest.  This will return an instance of Card -as a counted pile From Pile
+    // so I'm saying playerFlipsCard from the Pile pile and will return the instance of Card card-,
+    // so we can use it for playerSlaps().
+    public Card playerFlipsCard(Pile pile) {
+        if (playerHand.isEmpty()) {
+            throw new NoSuchElementException("No cards are left to flip");
+        }
+        Card card = playerHand.remove(0); // removes the first card from playerHand
+        pile.addToPile(card);  // adds this instance of card to the pile.  This is why instances are super important.
+        return card;  // now we can use Player.card as our clearing pile everytime we have a slap.
     }
 
     public static String playerSays(int position) { // CJ: test successful 11/19
         CardType cardType = CardType.findByPosition(position);
         if (cardType != null) {
             return cardType.getLabel();
-        }
-        else {
+        } else {
             return "Something is wrong with Player.playerSays";
         }
     }
