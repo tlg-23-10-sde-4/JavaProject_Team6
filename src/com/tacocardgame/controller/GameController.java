@@ -21,6 +21,7 @@ public class GameController {
     private Deck deck = new Deck();
     private Prompter prompter = new Prompter(new Scanner(System.in));
     private List<Player> players = new ArrayList<>();
+    private final Pile pile = new Pile(); // Pile instance
 
 
     public GameController(Deck deck, List<Player> players) throws IOException {
@@ -83,7 +84,7 @@ public class GameController {
 
             for (int i = 0; i < players.size(); i++) {
                 Player currentPlayer = players.get(i);
-                String wordSpoken = currentPlayer.playerSays();     //gets the word spoken by the current player
+                String wordSpoken = currentPlayer.playerSays();     //gets the word spoken by the current player //
                 System.out.println(currentPlayer.getName() + " says: " + wordSpoken);
 
                 if (wordSpoken.equalsIgnoreCase(middleCard.getType().getLabel())) {    // used to compare strings of playerSays and middle card name, ignoring case
@@ -94,7 +95,8 @@ public class GameController {
 
                         if (player != currentPlayer) {
                             //TODO: create isUser() in Player class, * PLAYERID
-                            if (!player.isUser()) {        //NPC actions
+                            if (!player.isUser()) {        // keith, what are the properties of a player that is not a NPC?
+                                // As in, what would their playerID be? you can define isUser() this way.  #JS 20NOV 1212
                                 executorService.submit(() -> {
                                     Random random = new Random();
                                     int npcSlapDelay = random.nextInt(2000);     //random delays between 0-2000ms
@@ -116,7 +118,7 @@ public class GameController {
                                         System.out.println(player.getName() + " slaps");
                                         playerSlapped = true;
                                     }
-                            //     (random.nextBoolean())  maybe use for npc decision making process for slaps?
+
                     }
                     if (!playerSlapped) {
                         System.out.println(currentPlayer.getName() + " is the last to slap!");
@@ -131,7 +133,7 @@ public class GameController {
             //check if player has won
                     if (lastPlayerToSlap != null) {
                         lastPlayerToSlap.addCardsToPlayerHand(Pile.getMiddleStack()); //TODO: getMiddleStack() or identify () in Pile Adds the entire middle stack to the last slapped player's set of cards
-                if (Player.getPlayerHand().isEmpty()) { // much simpler than creating a hasNoCards() method
+                if (Player.getPlayerHand().isEmpty()) { // KP: much simpler than creating a hasNoCards() method  #JS- Fact.
                     System.out.println(Player.getName() + " wins the game!");   //announceWinner(); when checkCard method shows a player's cards = 0
                     gameWon = true;
                 }

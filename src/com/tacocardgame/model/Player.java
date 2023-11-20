@@ -12,7 +12,7 @@ public class Player {
     // static final List<String> tacoList = new ArrayList<>(  //consider making enum class
     //        List.of("TACO", "CAT", "GOAT", "CHEESE", "PIZZA"));
     // static int tacoListCounter = 0;    // TODO: (NEED TO DISCUSS) make sure this resets to 0 when a player loses a round
-    private ArrayList<Card> playerHand = new ArrayList<>();
+    private List<Card> playerHand;
     private String name;
     private int playerId;
 
@@ -97,7 +97,7 @@ public class Player {
         return this.name;
     }
 
-    public ArrayList<Card> getPlayerHand() {
+    public List<Card> getPlayerHand() {
         return playerHand;
     }
 
