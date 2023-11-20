@@ -19,7 +19,6 @@ public class Round {
 
     // Method to update targetPosition from last stopPosition
 
-    // Need to add error handling here. CJ, can you do this?
     private static void updateTargetPosition() {
         int lastStopPosition = stopPosition.get(stopPosition.size() - 1);
         targetPosition.add(lastStopPosition + 1);
