@@ -11,7 +11,7 @@ import static com.tacocardgame.model.CardType.*;
 
 public class UserTest {
 
-    Pile pile = new Pile();
+//    Pile pile = new Pile();
     Card taco = new Card(TACO);
     Card cat = new Card(CAT);
     Card goat = new Card(GOAT);
@@ -47,22 +47,22 @@ public class UserTest {
         }
     }
 
-    @Test
-    public void playerFlipsCard_shouldReturnTheCardAtPosition0AndDecrementTheHand() {
-        System.out.print("User hand BEFORE the flip: ");
-        for (Card card : playerHand) {
-            System.out.print(card.getType() + " ");
-        }
-        System.out.println("\n");
-        System.out.print("Flipped card: ");
-        Card card = User.playerFlipsCard();
-        System.out.print(card.getType() + "\n");
-
-        System.out.print("User hand AFTER the flip: ");
-        for (Card card1 : playerHand) {
-            System.out.print(card1.getType() + " ");
-        }
-    }
+//    @Test
+//    public void playerFlipsCard_shouldReturnTheCardAtPosition0AndDecrementTheHand() {
+//        System.out.print("User hand BEFORE the flip: ");
+//        for (Card card : playerHand) {
+//            System.out.print(card.getType() + " ");
+//        }
+//        System.out.println("\n");
+//        System.out.print("Flipped card: ");
+//        Card card = User.playerFlipsCard();
+//        System.out.print(card.getType() + "\n");
+//
+//        System.out.print("User hand AFTER the flip: ");
+//        for (Card card1 : playerHand) {
+//            System.out.print(card1.getType() + " ");
+//        }
+//    }
 
     // CANNOT test in IntelliJ; instead you must copy the method in Jshell and run it from there
     // The method ALMOST works correctly

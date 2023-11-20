@@ -51,13 +51,11 @@ public class Player {
         Card card = playerHand.remove(0); // removes the first card from playerHand
 
         if (card == null) {
-            throw new NullPointerException("The card you tried to flip is null")
+            throw new NullPointerException("The card you tried to flip is null");
         }
 
         pile.addToPile(card);  // adds this instance of card to the pile.  This is why instances are super important.
         return card;  // now we can use Player.card as our clearing pile everytime we have a slap.
-
-
 
     }
 
@@ -108,7 +106,7 @@ public class Player {
         this.name = name;
     }
 
-    public static String getName() {
+    public String getName() {
         return this.name;
     }
 

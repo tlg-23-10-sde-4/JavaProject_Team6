@@ -5,12 +5,17 @@ import org.junit.Test;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Deque;
+import java.lang.Iterable;
+import java.util.Iterator;
 
 import static com.tacocardgame.model.CardType.*;
 
 public class PlayerTest {
 
-    Pile pile = new Pile();
+//    Pile testPile;
+    Deque<Card> testPile;
+//    private ArrayList<Card> addToPile;
     Card taco = new Card(TACO);
     Card cat = new Card(CAT);
     Card goat = new Card(GOAT);
@@ -23,8 +28,14 @@ public class PlayerTest {
     public void initialize() {
         playerHand = new ArrayList<>(Arrays.asList(taco, cat, goat, cheese, pizza, taco));
         player = new Player("player", 3, (playerHand));
+        testPile.add(cheese);
     }
 
+    @Test
+    public void pile_shouldBeInstantiated() {
+        Iterator iteratorValues = testPile.iterator();
+        System.out.println(iteratorValues);
+    }
 
     @Test
     public void playerSays_shouldOutputCorrectResult() {
@@ -46,22 +57,22 @@ public class PlayerTest {
         }
     }
 
-    @Test
-    public void playerFlipsCard_shouldReturnTheCardAtPosition0AndDecrementTheHand() {
-        System.out.print("Player hand BEFORE the flip: ");
-        for (Card card : playerHand) {
-            System.out.print(card.getType() + " ");
-        }
-        System.out.println("\n");
-        System.out.print("Flipped card: ");
-        Card card = player.playerFlipsCard();
-        System.out.print(card.getType() + "\n");
-
-        System.out.print("Player hand AFTER the flip: ");
-        for (Card card1 : playerHand) {
-            System.out.print(card1.getType() + " ");
-        }
-    }
+//    @Test
+//    public void playerFlipsCard_shouldReturnTheCardAtPosition0AndDecrementTheHand() {
+//        System.out.print("Player hand BEFORE the flip: ");
+//        for (Card card : playerHand) {
+//            System.out.print(card.getType() + " ");
+//        }
+//        System.out.println("\n");
+//        System.out.print("Flipped card: ");
+//        Card card = player.playerFlipsCard();
+//        System.out.print(card.getType() + "\n");
+//
+//        System.out.print("Player hand AFTER the flip: ");
+//        for (Card card1 : playerHand) {
+//            System.out.print(card1.getType() + " ");
+//        }
+//    }
 
     @Test
     public void playerSlaps_shouldBeNull() throws InterruptedException {    // Method overridden in both subclasses

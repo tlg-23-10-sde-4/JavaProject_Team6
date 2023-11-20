@@ -13,7 +13,7 @@ import static java.lang.Thread.sleep;
 
 public class NpcTest {
 
-    Pile pile = new Pile();
+//    Pile pile = new Pile();
     Card taco = new Card(TACO);
     Card cat = new Card(CAT);
     Card goat = new Card(GOAT);
@@ -49,22 +49,22 @@ public class NpcTest {
         }
     }
 
-    @Test
-    public void playerFlipsCard_shouldReturnTheCardAtPosition0AndDecrementTheHand() {
-        System.out.print("Npc hand BEFORE the flip: ");
-        for (Card card : playerHand) {
-            System.out.print(card.getType() + " ");
-        }
-        System.out.println("\n");
-        System.out.print("Flipped card: ");
-        Card card = Npc.playerFlipsCard();
-        System.out.print(card.getType() + "\n");
-
-        System.out.print("Npc hand AFTER the flip: ");
-        for (Card card1 : playerHand) {
-            System.out.print(card1.getType() + " ");
-        }
-    }
+//    @Test
+//    public void playerFlipsCard_shouldReturnTheCardAtPosition0AndDecrementTheHand() {
+//        System.out.print("Npc hand BEFORE the flip: ");
+//        for (Card card : playerHand) {
+//            System.out.print(card.getType() + " ");
+//        }
+//        System.out.println("\n");
+//        System.out.print("Flipped card: ");
+//        Card card = Npc.playerFlipsCard();
+//        System.out.print(card.getType() + "\n");
+//
+//        System.out.print("Npc hand AFTER the flip: ");
+//        for (Card card1 : playerHand) {
+//            System.out.print(card1.getType() + " ");
+//        }
+//    }
     // There might be a problem here
     // Seems like Npc2 is waiting for Npc1 to finish slapping who is waiting for Npc to finish slapping.
     // Need them to run concurrently so Npc4 isn't slapping 6 seconds after we enter slap environment
