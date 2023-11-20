@@ -12,7 +12,7 @@ import java.util.Map;
 import java.util.TreeMap;
 
 public class Board implements Serializable {
-    private static final String dataFilePath = "C:\\Users\\KPerk\\OneDrive\\Desktop\\G6 Project\\new13.txt"; // REPLACE WITH ACTUAL FILE
+    private static final String dataFilePath = "resources/images/welcome-A; // REPLACE WITH ACTUAL FILE
 
     public static Board getInstance() {
         Board board = null;
