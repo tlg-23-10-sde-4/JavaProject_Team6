@@ -84,10 +84,10 @@ public class GameController {
 
             for (int i = 0; i < players.size(); i++) {
                 Player currentPlayer = players.get(i);
-                String wordSpoken = currentPlayer.playerSays();     //gets the word spoken by the current player //
-                System.out.println(currentPlayer.getName() + " says: " + wordSpoken);
+                String playerStatement = currentPlayer.playerSays();     //gets the word spoken by the current player //
+                System.out.println(currentPlayer.getName() + " says: " + playerStatement);
 
-                if (wordSpoken.equalsIgnoreCase(middleCard.getType().getLabel())) {    // used to compare strings of playerSays and middle card name, ignoring case
+                if (playerStatement.equalsIgnoreCase(middleCard.getType().getLabel())) {    // used to compare strings of playerSays and middle card name, ignoring case
                 // slap protocol begins
                     boolean playerSlapped = false;
 
@@ -125,14 +125,15 @@ public class GameController {
                         long endTime = System.currentTimeMillis();      //records the end time slapped for last player calculation
                         long timeElapsed = endTime - roundStartTime;
                         System.out.println("Slap time for last player: " + timeElapsed + "milliseconds");
+                        pile.clearPile();
                     }
-                    Pile.clearPile();       // reset the middle stack
+
                 }
             }
 
             //check if player has won
                     if (lastPlayerToSlap != null) {
-                        lastPlayerToSlap.addCardsToPlayerHand(Pile.getMiddleStack()); //TODO: getMiddleStack() or identify () in Pile Adds the entire middle stack to the last slapped player's set of cards
+                        lastPlayerToSlap.addCardsToPlayerHand(Player.card()); //TODO: getMiddleStack() or identify () in Pile Adds the entire middle stack to the last slapped player's set of cards
                 if (Player.getPlayerHand().isEmpty()) { // KP: much simpler than creating a hasNoCards() method  #JS- Fact.
                     System.out.println(Player.getName() + " wins the game!");   //announceWinner(); when checkCard method shows a player's cards = 0
                     gameWon = true;

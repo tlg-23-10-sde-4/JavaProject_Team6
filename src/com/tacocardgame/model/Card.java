@@ -15,6 +15,7 @@ public class Card {
     }
 
     public void show() {
+
         System.out.println(image);
     }
 
