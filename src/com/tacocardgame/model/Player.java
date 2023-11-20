@@ -47,9 +47,18 @@ public class Player {
         if (playerHand.isEmpty()) {
             throw new NoSuchElementException("No cards are left to flip");
         }
+
         Card card = playerHand.remove(0); // removes the first card from playerHand
+
+        if (card == null) {
+            throw new NullPointerException("The card you tried to flip is null")
+        }
+
         pile.addToPile(card);  // adds this instance of card to the pile.  This is why instances are super important.
         return card;  // now we can use Player.card as our clearing pile everytime we have a slap.
+
+
+
     }
 
     public static String playerSays(int position) { // CJ: test successful 11/19
