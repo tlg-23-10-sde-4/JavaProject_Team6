@@ -14,12 +14,12 @@ public class Card {
         this.image = image;
     }
 
-    public void show() {
+    public void show(String image) {
 
         System.out.println(image);
     }
 
-    public CardType getType() {       //get name of card in middlecard obj
+    public CardType getType() {
         return type;
     }
 }

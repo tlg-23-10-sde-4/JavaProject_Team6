@@ -64,7 +64,5 @@ public class PileTest {
         System.out.println(pile.getSize());
     }
 
-    @Test
-    public void clearPile() {
-    }
+
 }

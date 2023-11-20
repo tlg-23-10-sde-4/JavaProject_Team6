@@ -15,8 +15,6 @@ public class Pile {
         return pile.peekFirst();
     }
 
-
-
     public int getSize() {
         return pile.size();
     }
@@ -25,8 +23,4 @@ public class Pile {
         pile.clear();
     }
 
-//    @Override
-//    private String toString() {
-//        return
-//    }
 }

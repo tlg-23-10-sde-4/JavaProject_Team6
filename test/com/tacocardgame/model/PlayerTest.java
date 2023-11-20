@@ -13,9 +13,7 @@ import static com.tacocardgame.model.CardType.*;
 
 public class PlayerTest {
 
-//    Pile testPile;
-    Deque<Card> testPile;
-//    private ArrayList<Card> addToPile;
+    Pile pile = new Pile();
     Card taco = new Card(TACO);
     Card cat = new Card(CAT);
     Card goat = new Card(GOAT);
@@ -28,13 +26,15 @@ public class PlayerTest {
     public void initialize() {
         playerHand = new ArrayList<>(Arrays.asList(taco, cat, goat, cheese, pizza, taco));
         player = new Player("player", 3, (playerHand));
-        testPile.add(cheese);
+        pile.addToPile(cheese);
+        pile.addToPile(taco);
     }
 
     @Test
     public void pile_shouldBeInstantiated() {
-        Iterator iteratorValues = testPile.iterator();
-        System.out.println(iteratorValues);
+        Card card = null;
+        pile.addToPile(card);
+        System.out.println(pile.showTopOfPile());
     }
 
     @Test
