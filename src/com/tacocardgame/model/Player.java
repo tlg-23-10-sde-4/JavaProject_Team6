@@ -13,7 +13,7 @@ public class Player {
     // static final List<String> tacoList = new ArrayList<>(  //consider making enum class
     //        List.of("TACO", "CAT", "GOAT", "CHEESE", "PIZZA"));
     // static int tacoListCounter = 0;    // TODO: (NEED TO DISCUSS) make sure this resets to 0 when a player loses a round
-    private List<Card> playerHand;
+    private static List<Card> playerHand;
     private String name;
     private int playerId;
 
@@ -29,7 +29,6 @@ public class Player {
     public Player(String name, int playerId) {
         setName(name);
         setPlayerId(playerId);
-        this.isUser = (playerId == 1);
     }
 
     public Player(String name, int playerId, ArrayList<Card> playerHand) {
@@ -41,7 +40,7 @@ public class Player {
     // METHODS
 
     // CJ: test successful 11/19  # JS- I changed playerFlipsCard to dec&inc card
-    //# JS- need to retest.  This will return an instance of Card -as a counted pile From Pile
+    //# JS- need to retest.  This will return an instance of Card - as a counted pile From Pile
     // so I'm saying playerFlipsCard from the Pile pile and will return the instance of Card card-,
     // so we can use it for playerSlaps().
     public Card playerFlipsCard(Pile pile) {
@@ -100,23 +99,23 @@ public class Player {
         this.name = name;
     }
 
-    public String getName() {
+    public static String getName() {
         return this.name;
     }
 
-    public List<Card> getPlayerHand() {
+    public static List<Card> getPlayerHand() {
         return playerHand;
     }
 
-    public void setPlayerHand(ArrayList<Card> playerHand) {
-        this.playerHand = playerHand;
+    public static void setPlayerHand(ArrayList<Card> playerHand) {
+        Player.playerHand = playerHand;
     }
 
     public int getPlayerId() {
         return playerId;
     }
 
-    public void setPlayerId(int playerId) {
+    void setPlayerId(int playerId) {
         this.playerId = playerId;
     }
 
