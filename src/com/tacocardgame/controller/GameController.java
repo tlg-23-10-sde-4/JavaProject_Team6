@@ -82,7 +82,7 @@ public class GameController {
                     boolean lastPlayerSlapped = false;
 
                     for (Player player : players) {
-                        if (player != currentPlayer) {      //TODO: create isnotNPC() in Player class,
+                        if (player != currentPlayer) {      //TODO: create isnotNPC() in Player class, if always assigned as player 1
                             if (player.isnotNPC) {
                                 System.out.println("Press the space bar to slap (any other key to skip)");
                                 String userInput = scanner.nextLine();
