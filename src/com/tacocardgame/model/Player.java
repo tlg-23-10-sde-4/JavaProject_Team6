@@ -78,8 +78,8 @@ public class Player {
 //                while (player.getPlayerHand().isEmpty()) == false);
     }
 
-    public Date playerSlaps() throws InterruptedException {
-        Date timeOfSlap = null;
+    public long playerSlaps() throws InterruptedException {
+        long timeOfSlap = 0;
         return timeOfSlap;
     }
 

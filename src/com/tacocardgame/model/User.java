@@ -21,11 +21,11 @@ public class User extends Player {
 
     // intent is to capture the exact time of the user's slap (pressing spacebar) for comparison to the Npc Players
     @Override
-    public Date playerSlaps() {
-        Date result = null;
+    public long playerSlaps() {
+        long result = 0;
         Scanner playerSlap = new Scanner(System.in);
         if (playerSlap.equals(" ")) {   // when player presses spacebar, playerSlaps() returns the time of that press.
-            result = new Date();
+            result = new Date().getTime();
         }
         return result;
     }

@@ -4,6 +4,8 @@ import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 
+import static java.lang.Thread.sleep;
+
 public class Npc extends Player {
 
     private String name;
@@ -20,17 +22,17 @@ public class Npc extends Player {
     }
 
     @Override
-    public Date playerSlaps() throws InterruptedException {
+    public long playerSlaps() throws InterruptedException {
 
         double doubleWaitTime = 1000 + (1000 * Math.random());   // Gives a double value between 1000 and 2000, roughly
         //TODO: I'm sure there's a better way to pass a random long to this.wait()
         long waitTime = Math.round(doubleWaitTime); // converts the double to long
 
-        this.wait(waitTime);    // this. to make sure each Npc Player has their own wait time
+        sleep(waitTime);
 
         // the time - down to milliseconds - of the Npc Player slap
         // SHOULD!!! happen after the wait as the code is read sequentially
-        Date result = new Date();
+        long result = new Date().getTime();
 
         // For use in an ArrayList<> or similar so we can determine the loser
         return result;
