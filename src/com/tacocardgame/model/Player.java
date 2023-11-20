@@ -79,7 +79,7 @@ public class Player {
     }
 
     public long playerSlaps() {
-        long timeOfSlap = 0;
+        long timeOfSlap = 987654321;    // CJ: for testing - see if it's properly overwritten
         return timeOfSlap;
     }
 
