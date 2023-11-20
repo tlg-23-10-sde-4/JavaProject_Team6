@@ -108,7 +108,4 @@ public class NpcTest {
             System.out.print(card1.getType() + " ");
         }
     }
-
-
-
 }
