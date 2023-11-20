@@ -1,6 +1,7 @@
 package com.tacocardgame.model;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -15,10 +16,10 @@ public class Npc extends Player {
         getPlayerId();
     }
 
-    public Npc(String name, int playerID, List<Card> playerHand) {
+    public Npc(String name, int playerID, ArrayList<Card> playerHand) {
         getName();
         getPlayerId();
-        playerHand = getPlayerHand();
+        setPlayerHand(playerHand);
     }
 
     @Override
