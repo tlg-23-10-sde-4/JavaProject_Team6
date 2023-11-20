@@ -18,20 +18,20 @@ public class User extends Player {
         setPlayerHand(playerHand);
     }
 
-    // intent is to capture the exact time of the user's slap (pressing spacebar) for comparison to the Npc Players
-//    @Override
-//    public long playerSlaps() {
-//        long result = 0;
-//        System.out.println("Scanner should load next"); // CJ: for testing
-//        Scanner playerSlap = new Scanner(System.in);
-//        synchronized (playerSlap) {
-//            while (playerSlap != " " && )
-//        }
-//
-//        if (playerSlap.equals(" ")) {   // when player presses spacebar, playerSlaps() returns the time of that press.
-//            result = new Date().getTime();
-//        }
-//        return result;
-//    }
+    // CANNOT test in IntelliJ; instead you must copy the method in Jshell and run it from there
+    // The method ALMOST works correctly
+    // Currently need to press spacebar AND THEN enter
+    // If you press any other combination you will get the default value
+    @Override
+    public long playerSlaps() {
+        long result = 1234567890;   // CJ: for testing - see if we are properly overriding the super
+        System.out.println("Scanner should load next"); // CJ: for testing
+        Scanner playerSlap = new Scanner(System.in);
+        String userInput = playerSlap.nextLine();
+        if (userInput.equalsIgnoreCase(" ")) {
+            result = new Date().getTime();
+        }
+        return result;
+    }
 
 }

@@ -63,9 +63,11 @@ public class UserTest {
             System.out.print(card1.getType() + " ");
         }
     }
-    // There might be a problem here
-    // Seems like Npc2 is waiting for Npc1 to finish slapping who is waiting for Npc to finish slapping.
-    // Need them to run concurrently so Npc4 isn't slapping 6 seconds after we enter slap environment
+
+    // CANNOT test in IntelliJ; instead you must copy the method in Jshell and run it from there
+    // The method ALMOST works correctly
+    // Currently need to press spacebar AND THEN enter
+    // If you press any other combination you will get the default value
     @Test
     public void playerSlaps_shouldReturnDTG_whenUserPressesSpaceBar() throws InterruptedException { // There might be a problem here
         long time = User.playerSlaps();
