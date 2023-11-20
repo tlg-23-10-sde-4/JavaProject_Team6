@@ -92,7 +92,7 @@ public class GameController {
                                 }
                             } else {
                                 // Automated players
-                                if (random.nextBoolean()) {
+                                if (random.nextBoolean()) {         // have check in place and repeat until all npc players slapped
                                     System.out.println(player.getName() + " slaps!");
                                     lastPlayerSlapped = true;
                             }
