@@ -2,13 +2,14 @@ package com.tacocardgame.controller;
 
 import com.apps.util.Console;
 import com.apps.util.Prompter;
-import com.tacocardgame.model.*;
-import com.tacocardgame.view.*;
+import com.tacocardgame.model.Card;
+import com.tacocardgame.model.Deck;
+import com.tacocardgame.model.Pile;
+import com.tacocardgame.model.Player;
 
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -73,12 +74,12 @@ public class GameController {
     private void playGame() {
         Card middleCard = deck.nextCard();  //draws the first card(top card) from the deck
         boolean gameWon = false;
-        Scanner scanner = new Scanner(System.in);
+        Prompter prompter = new Prompter(new Scanner(System.in));
 
         while (!gameWon) {
             long roundStartTime = System.currentTimeMillis();        //records the start time for each player's turn
             ExecutorService executorService = Executors.newCachedThreadPool();  //managing slap threads
-            Player lastSlapPlayer = null;
+            Player lastPlayerToSlap = null;
 
             for (int i = 0; i < players.size(); i++) {
                 Player currentPlayer = players.get(i);
@@ -92,14 +93,14 @@ public class GameController {
                     for (Player player : players) {
 
                         if (player != currentPlayer) {
-                            //TODO: create isHuman() in Player class, * PLAYERID
-                            if (!player.isHuman()) {        //NPC actions
+                            //TODO: create isUser() in Player class, * PLAYERID
+                            if (!player.isUser()) {        //NPC actions
                                 executorService.submit(() -> {
                                     Random random = new Random();
                                     int npcSlapDelay = random.nextInt(2000);     //random delays between 0-2000ms
 
                                     try {
-                                        Thread.sleep(npcSlapDelay);
+                                        Thread.sleep(npcSlapDelay);     //slap delay intro
                                     } catch (InterruptedException e) {
                                         e.printStackTrace();
                                     }
@@ -107,11 +108,13 @@ public class GameController {
                                     playerSlapped = true;
                                 });
                             } else {        //human actions
-                                    System.out.println("Press the space bar to slap (any other key to skip)");      //RETURNS 0 *BUG*  KP
-                                    String userInput = scanner.nextLine();
+
+                                prompter.info("Press the space bar to slap");
+                                String userInput = prompter.prompt("");
+
                                     if (userInput.equals(" ")) {
-                                    System.out.println(player.getName() + " slaps");
-                                    playerSlapped = true;
+                                        System.out.println(player.getName() + " slaps");
+                                        playerSlapped = true;
                                     }
                             //     (random.nextBoolean())  maybe use for npc decision making process for slaps?
                     }
@@ -126,8 +129,8 @@ public class GameController {
             }
 
             //check if player has won
-                    if (lastSlapPlayer != null) {
-                        lastSlapPlayer.addCardsToPlayerHand(Pile.getMiddleStack()); //TODO: getMiddleStack() or identify () in Pile Adds the entire middle stack to the last slapped player's set of cards
+                    if (lastPlayerToSlap != null) {
+                        lastPlayerToSlap.addCardsToPlayerHand(Pile.getMiddleStack()); //TODO: getMiddleStack() or identify () in Pile Adds the entire middle stack to the last slapped player's set of cards
                 if (Player.getPlayerHand().isEmpty()) { // much simpler than creating a hasNoCards() method
                     System.out.println(Player.getName() + " wins the game!");   //announceWinner(); when checkCard method shows a player's cards = 0
                     gameWon = true;
