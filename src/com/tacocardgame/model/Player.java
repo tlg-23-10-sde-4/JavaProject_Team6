@@ -78,7 +78,7 @@ public class Player {
 //                while (player.getPlayerHand().isEmpty()) == false);
     }
 
-    public long playerSlaps() throws InterruptedException {
+    public long playerSlaps() {
         long timeOfSlap = 0;
         return timeOfSlap;
     }

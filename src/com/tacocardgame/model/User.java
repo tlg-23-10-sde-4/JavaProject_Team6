@@ -6,7 +6,6 @@ import java.util.List;
 import java.util.Scanner;
 
 public class User extends Player {
-    List<Card> playerHand;
 
     public User(String name, int playerId) {
         setName(name);
@@ -20,14 +19,19 @@ public class User extends Player {
     }
 
     // intent is to capture the exact time of the user's slap (pressing spacebar) for comparison to the Npc Players
-    @Override
-    public long playerSlaps() {
-        long result = 0;
-        Scanner playerSlap = new Scanner(System.in);
-        if (playerSlap.equals(" ")) {   // when player presses spacebar, playerSlaps() returns the time of that press.
-            result = new Date().getTime();
-        }
-        return result;
-    }
+//    @Override
+//    public long playerSlaps() {
+//        long result = 0;
+//        System.out.println("Scanner should load next"); // CJ: for testing
+//        Scanner playerSlap = new Scanner(System.in);
+//        synchronized (playerSlap) {
+//            while (playerSlap != " " && )
+//        }
+//
+//        if (playerSlap.equals(" ")) {   // when player presses spacebar, playerSlaps() returns the time of that press.
+//            result = new Date().getTime();
+//        }
+//        return result;
+//    }
 
 }

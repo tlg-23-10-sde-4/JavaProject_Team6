@@ -24,7 +24,7 @@ public class NpcTest {
 
     @Before
     public void initialize() {
-        playerHand = new ArrayList<>(Arrays.asList(taco, cat, goat, cheese, pizza, taco));
+        playerHand = new ArrayList<>(Arrays.asList(cat, goat, cheese, pizza, taco, cat));
         Npc = new Npc("Npc", 3, playerHand);
     }
 
@@ -65,11 +65,33 @@ public class NpcTest {
             System.out.print(card1.getType() + " ");
         }
     }
-
+    // There might be a problem here
+    // Seems like Npc2 is waiting for Npc1 to finish slapping who is waiting for Npc to finish slapping.
+    // Need them to run concurrently so Npc4 isn't slapping 6 seconds after we enter slap environment
     @Test
-    public void playerSlaps_shouldReturnDTG() throws InterruptedException {
-
-        System.out.println("Current Time: " + Date().getTime() + "Slap Time: " + Npc.playerSlaps());
+    public void playerSlaps_shouldReturnDTG() throws InterruptedException { // There might be a problem here
+        Npc Npc1 = new Npc("Npc", 3, playerHand);
+        Npc Npc2 = new Npc("Npc", 3, playerHand);
+        Npc Npc3 = new Npc("Npc", 3, playerHand);
+        Npc Npc4 = new Npc("Npc", 3, playerHand);
+        Npc Npc5 = new Npc("Npc", 3, playerHand);
+        Npc Npc6 = new Npc("Npc", 3, playerHand);
+        System.out.println("Current Time: " + new Date().getTime() + "Slap Time: " + Npc.playerSlaps());
+        long time = new Date().getTime();
+        long time1 = Npc.playerSlaps();
+        long time2 = Npc1.playerSlaps();
+        long time3 = Npc2.playerSlaps();
+        long time4 = Npc3.playerSlaps();
+        long time5 = Npc4.playerSlaps();
+        long time6 = Npc5.playerSlaps();
+        long time7 = Npc6.playerSlaps();
+        System.out.println(time - time1);
+        System.out.println(time - time2);
+        System.out.println(time - time3);
+        System.out.println(time - time4);
+        System.out.println(time - time5);
+        System.out.println(time - time6);
+        System.out.println(time - time7);
     }
 
     @Test
@@ -86,7 +108,4 @@ public class NpcTest {
             System.out.print(card1.getType() + " ");
         }
     }
-
-
-
 }
