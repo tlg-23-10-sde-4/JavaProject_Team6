@@ -17,6 +17,8 @@ public class GameController {
     private Pile pile;
     private Player winner;
     private BoardView boardView;
+    int currentPlayerIndex = 0;
+    int currentSpokenIndex = 0;
 
     public GameController() throws IOException {
         this.deck = new Deck();
@@ -76,29 +78,37 @@ public class GameController {
     }
 
     public void playGame() {
+        Console.clear();
         boolean gameWon = false;
-        int currentPlayerIndex = 0;
+            do {
 
-        while (!gameWon) {
-            Player currentPlayer = players.get(currentPlayerIndex);
-            Card flippedCard = currentPlayer.takeTurn(pile);
+                Player currentPlayer = players.get(currentPlayerIndex);
+                gameWon = currentPlayer.getPlayerHand().isEmpty();
+                Card flippedCard = currentPlayer.takeTurn(pile);
+                String saidCard = currentPlayer.playerSays(currentPlayerIndex);
+                System.out.println(saidCard);
+                if (currentSpokenIndex < 5) {
+                    currentSpokenIndex++;
+                }
+                else {
+                    currentSpokenIndex = 0;
+                }
 
-            // Check for a match and handle slap if necessary
-            if (flippedCard.getType().getLabel().equalsIgnoreCase(Objects.requireNonNull(CardType.findByPosition(currentPlayerIndex)).getLabel())) {
-                handleSlap();
-            }
-
-            // Check if the game is won
-            gameWon = currentPlayer.getPlayerHand().isEmpty();
+                // Check for a match and handle slap if necessary
+                if (flippedCard.getType().getLabel().equalsIgnoreCase(saidCard)) {
+//                    currentSpokenIndex = 0;
+                    handleSlap();
+                }
 
             // Move to the next player
             currentPlayerIndex = (currentPlayerIndex + 1) % players.size();
 
-        }
+            }                    // Check if the game is won
+            while (gameWon == false);
 
-        // Announce winner
-        Player winner = players.get((currentPlayerIndex - 1 + players.size()) % players.size());
-        System.out.println("Game Over! The winner is " + winner.getName());
+            // Announce winner
+            Player winner = players.get((currentPlayerIndex - 1 + players.size()) % players.size());
+            System.out.println("Game Over! The winner is " + winner.getName());
     }
 
 
