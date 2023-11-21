@@ -43,8 +43,4 @@ public class Npc extends Player {
         this.name = name;
     }
 
-    public String getName() {
-        return this.name;
-    }
-
 }

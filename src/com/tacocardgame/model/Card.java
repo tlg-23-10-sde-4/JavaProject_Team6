@@ -1,5 +1,9 @@
 package com.tacocardgame.model;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+
 public class Card {
 
     private CardType type;
@@ -19,7 +23,7 @@ public class Card {
         System.out.println(image);
     }
 
-    public CardType getType() {       //get name of card in middlecard obj
+    public CardType getType() {
         return type;
     }
 }

@@ -26,6 +26,11 @@ public class NpcTest {
     public void initialize() {
         playerHand = new ArrayList<>(Arrays.asList(cat, goat, cheese, pizza, taco, cat));
         Npc = new Npc("Npc", 3, playerHand);
+        pile.addToPile(cheese);
+        pile.addToPile(taco);
+        pile.addToPile(taco);
+        pile.addToPile(taco);
+        pile.addToPile(taco);
     }
 
 
@@ -53,18 +58,24 @@ public class NpcTest {
     public void playerFlipsCard_shouldReturnTheCardAtPosition0AndDecrementTheHand() {
         System.out.print("Npc hand BEFORE the flip: ");
         for (Card card : playerHand) {
-            System.out.print(card.getType() + " ");
-        }
+        System.out.print(card.getType() + " ");
+    }
         System.out.println("\n");
+    Card topOfPile = pile.showTopOfPile();
+        System.out.println("Top card of the Pile: " + topOfPile.getType());
         System.out.print("Flipped card: ");
-        Card card = Npc.playerFlipsCard();
+    Card card = User.playerFlipsCard(pile);
         System.out.print(card.getType() + "\n");
 
         System.out.print("Npc hand AFTER the flip: ");
         for (Card card1 : playerHand) {
-            System.out.print(card1.getType() + " ");
-        }
+        System.out.print(card1.getType() + " ");
     }
+    topOfPile = pile.showTopOfPile();
+        System.out.println("\n");
+        System.out.println("Top card of the Pile: " + topOfPile.getType());
+    }
+
     // There might be a problem here
     // Seems like Npc2 is waiting for Npc1 to finish slapping who is waiting for Npc to finish slapping.
     // Need them to run concurrently so Npc4 isn't slapping 6 seconds after we enter slap environment
@@ -96,14 +107,13 @@ public class NpcTest {
 
     @Test
     public void addCardsToPlayerHand_shouldAddTheSelectedCardsToBottomOfPlayerHand() {
-        ArrayList<Card> pile = new ArrayList<>(Arrays.asList(pizza, cheese, goat, cat, taco));
-        System.out.print("Player hand BEFORE adding cards: ");
+        System.out.print("Npc hand BEFORE adding cards: ");
         for (Card card : playerHand) {
             System.out.print(card.getType() + " ");
         }
         System.out.println("\n");
         Npc.addCardsToPlayerHand(pile);
-        System.out.print("Player hand AFTER adding cards: ");
+        System.out.print("Npc hand AFTER adding cards: ");
         for (Card card1 : playerHand) {
             System.out.print(card1.getType() + " ");
         }

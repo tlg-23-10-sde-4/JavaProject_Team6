@@ -2,10 +2,7 @@
 
 package com.tacocardgame.model;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.NoSuchElementException;
+import java.util.*;
 
 public class Player {
 
@@ -13,7 +10,7 @@ public class Player {
     // static final List<String> tacoList = new ArrayList<>(  //consider making enum class
     //        List.of("TACO", "CAT", "GOAT", "CHEESE", "PIZZA"));
     // static int tacoListCounter = 0;    // TODO: (NEED TO DISCUSS) make sure this resets to 0 when a player loses a round
-    private List<Card> playerHand;
+    private static List<Card> playerHand;
     private String name;
     private int playerId;
 
@@ -29,7 +26,6 @@ public class Player {
     public Player(String name, int playerId) {
         setName(name);
         setPlayerId(playerId);
-        this.isUser = (playerId == 1);
     }
 
     public Player(String name, int playerId, ArrayList<Card> playerHand) {
@@ -41,16 +37,23 @@ public class Player {
     // METHODS
 
     // CJ: test successful 11/19  # JS- I changed playerFlipsCard to dec&inc card
-    //# JS- need to retest.  This will return an instance of Card -as a counted pile From Pile
+    //# JS- need to retest.  This will return an instance of Card - as a counted pile From Pile
     // so I'm saying playerFlipsCard from the Pile pile and will return the instance of Card card-,
     // so we can use it for playerSlaps().
-    public Card playerFlipsCard(Pile pile) {
+    public static Card playerFlipsCard(Pile pile) {
         if (playerHand.isEmpty()) {
             throw new NoSuchElementException("No cards are left to flip");
         }
+
         Card card = playerHand.remove(0); // removes the first card from playerHand
+
+        if (card == null) {
+            throw new NullPointerException("The card you tried to flip is null");
+        }
+
         pile.addToPile(card);  // adds this instance of card to the pile.  This is why instances are super important.
         return card;  // now we can use Player.card as our clearing pile everytime we have a slap.
+
     }
 
     public static String playerSays(int position) { // CJ: test successful 11/19
@@ -90,8 +93,10 @@ public class Player {
         return timeOfSlap;
     }
 
-    public void addCardsToPlayerHand(List<Card> cards) {
-        playerHand.addAll(cards);
+    public void addCardsToPlayerHand(Pile pile) {
+        ArrayList<Card> pileAsArrayList;
+        pileAsArrayList = pile.dequeToArrayList();
+        playerHand.addAll(pileAsArrayList);
     }
 
     // GETTERS & SETTERS
@@ -104,19 +109,19 @@ public class Player {
         return this.name;
     }
 
-    public List<Card> getPlayerHand() {
+    public static List<Card> getPlayerHand() {
         return playerHand;
     }
 
-    public void setPlayerHand(ArrayList<Card> playerHand) {
-        this.playerHand = playerHand;
+    public static void setPlayerHand(ArrayList<Card> playerHand) {
+        Player.playerHand = playerHand;
     }
 
     public int getPlayerId() {
         return playerId;
     }
 
-    public void setPlayerId(int playerId) {
+    void setPlayerId(int playerId) {
         this.playerId = playerId;
     }
 

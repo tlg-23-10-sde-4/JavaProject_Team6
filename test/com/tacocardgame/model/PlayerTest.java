@@ -5,8 +5,12 @@ import org.junit.Test;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Deque;
+import java.lang.Iterable;
+import java.util.Iterator;
 
 import static com.tacocardgame.model.CardType.*;
+import static com.tacocardgame.model.Pile.*;
 
 public class PlayerTest {
 
@@ -21,10 +25,21 @@ public class PlayerTest {
 
     @Before
     public void initialize() {
-        playerHand = new ArrayList<>(Arrays.asList(taco, cat, goat, cheese, pizza, taco));
+//        pile.clearPile();
+        playerHand = new ArrayList<>(Arrays.asList(cat, cat, goat, cheese, pizza, cat));
         player = new Player("player", 3, (playerHand));
+        pile.addToPile(cheese);
+        pile.addToPile(taco);
+        pile.addToPile(taco);
+        pile.addToPile(taco);
+        pile.addToPile(taco);
     }
 
+    @Test
+    public void pile_shouldBeInstantiated() {
+        Card card = pile.showTopOfPile();
+        System.out.println(card.getType());
+    }
 
     @Test
     public void playerSays_shouldOutputCorrectResult() {
@@ -47,20 +62,25 @@ public class PlayerTest {
     }
 
     @Test
-    public void playerFlipsCard_shouldReturnTheCardAtPosition0AndDecrementTheHand() {
+    public void playerFlipsCard_shouldReturnTheCardAndAddItToThePile() {
         System.out.print("Player hand BEFORE the flip: ");
         for (Card card : playerHand) {
             System.out.print(card.getType() + " ");
         }
         System.out.println("\n");
+        Card topOfPile = pile.showTopOfPile();
+        System.out.println("Top card of the Pile: " + topOfPile.getType());
         System.out.print("Flipped card: ");
-        Card card = player.playerFlipsCard();
+        Card card = player.playerFlipsCard(pile);
         System.out.print(card.getType() + "\n");
 
         System.out.print("Player hand AFTER the flip: ");
         for (Card card1 : playerHand) {
             System.out.print(card1.getType() + " ");
         }
+        topOfPile = pile.showTopOfPile();
+        System.out.println("\n");
+        System.out.println("Top card of the Pile: " + topOfPile.getType());
     }
 
     @Test
@@ -70,7 +90,7 @@ public class PlayerTest {
 
     @Test
     public void addCardsToPlayerHand_shouldAddTheSelectedCardsToBottomOfPlayerHand() {
-        ArrayList<Card> pile = new ArrayList<>(Arrays.asList(pizza, cheese, goat, cat, taco));
+
         System.out.print("Player hand BEFORE adding cards: ");
         for (Card card : playerHand) {
             System.out.print(card.getType() + " ");
@@ -81,6 +101,14 @@ public class PlayerTest {
         for (Card card1 : playerHand) {
             System.out.print(card1.getType() + " ");
         }
+    }
+
+
+    @Test
+    public void addCardsToPlayerHand_shouldNotWork_whenAddingNullCard() {
+        pile.clearPile();
+        pile.addToPile(null);
+        player.addCardsToPlayerHand(pile);
     }
 
 

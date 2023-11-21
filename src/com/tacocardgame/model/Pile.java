@@ -3,6 +3,8 @@ package com.tacocardgame.model;
 import java.util.*;
 
 public class Pile {
+
+
     private Deque<Card> pile = new ArrayDeque<>();
 
     public void addToPile(Card card) {
@@ -13,6 +15,21 @@ public class Pile {
         return pile.peekFirst();
     }
 
+    public ArrayList<Card> dequeToArrayList() {
+        ArrayList<Card> iteratedArrayList = new ArrayList<>();
+        while (pile.isEmpty() == false) {
+            Card card = pile.getFirst();
+            pile.remove();
+            iteratedArrayList.add(card);
+        }
+        return iteratedArrayList;
+    }
+
+//    public Deque pileToDeque(Pile pile) {
+//        ArrayDeque<Card> arrayDequePile = new ArrayDeque<Card>(pile);
+//
+//    }
+
     public int getSize() {
         return pile.size();
     }
@@ -20,4 +37,5 @@ public class Pile {
     public void clearPile() {
         pile.clear();
     }
+
 }

@@ -26,6 +26,7 @@ public class User extends Player {
     public long playerSlaps() {
         long result = 1234567890;   // CJ: for testing - see if we are properly overriding the super
         System.out.println("Scanner should load next"); // CJ: for testing
+
         Scanner playerSlap = new Scanner(System.in);
         String userInput = playerSlap.nextLine();
         if (userInput.equalsIgnoreCase(" ")) {
@@ -33,5 +34,4 @@ public class User extends Player {
         }
         return result;
     }
-
 }

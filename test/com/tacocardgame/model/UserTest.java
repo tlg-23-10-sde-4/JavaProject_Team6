@@ -22,8 +22,13 @@ public class UserTest {
 
     @Before
     public void initialize() {
-        playerHand = new ArrayList<>(Arrays.asList(goat, cheese, pizza, taco, cat, goat));
-        User = new User("User", 3, playerHand);
+        playerHand = new ArrayList<>(Arrays.asList(cat, cat, goat, cheese, pizza, cat));
+        User = new Player("User", 3, (playerHand));
+        pile.addToPile(cheese);
+        pile.addToPile(taco);
+        pile.addToPile(taco);
+        pile.addToPile(taco);
+        pile.addToPile(taco);
     }
 
 
@@ -49,19 +54,24 @@ public class UserTest {
 
     @Test
     public void playerFlipsCard_shouldReturnTheCardAtPosition0AndDecrementTheHand() {
-        System.out.print("User hand BEFORE the flip: ");
+        System.out.print("Player hand BEFORE the flip: ");
         for (Card card : playerHand) {
-            System.out.print(card.getType() + " ");
-        }
+        System.out.print(card.getType() + " ");
+    }
         System.out.println("\n");
+    Card topOfPile = pile.showTopOfPile();
+        System.out.println("Top card of the Pile: " + topOfPile.getType());
         System.out.print("Flipped card: ");
-        Card card = User.playerFlipsCard();
+    Card card = User.playerFlipsCard(pile);
         System.out.print(card.getType() + "\n");
 
-        System.out.print("User hand AFTER the flip: ");
+        System.out.print("Player hand AFTER the flip: ");
         for (Card card1 : playerHand) {
-            System.out.print(card1.getType() + " ");
-        }
+        System.out.print(card1.getType() + " ");
+    }
+    topOfPile = pile.showTopOfPile();
+        System.out.println("\n");
+        System.out.println("Top card of the Pile: " + topOfPile.getType());
     }
 
     // CANNOT test in IntelliJ; instead you must copy the method in Jshell and run it from there
@@ -76,14 +86,13 @@ public class UserTest {
 
     @Test
     public void addCardsToPlayerHand_shouldAddTheSelectedCardsToBottomOfPlayerHand() {
-        ArrayList<Card> pile = new ArrayList<>(Arrays.asList(pizza, cheese, goat, cat, taco));
-        System.out.print("Player hand BEFORE adding cards: ");
+        System.out.print("User hand BEFORE adding cards: ");
         for (Card card : playerHand) {
             System.out.print(card.getType() + " ");
         }
         System.out.println("\n");
         User.addCardsToPlayerHand(pile);
-        System.out.print("Player hand AFTER adding cards: ");
+        System.out.print("User hand AFTER adding cards: ");
         for (Card card1 : playerHand) {
             System.out.print(card1.getType() + " ");
         }
