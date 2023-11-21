@@ -72,7 +72,7 @@ public class GameController {
 
   /*  //Distro cards to players
     private void distributeCards() {
-        int cardsPerPlayer = deck.getAllCards().size() / players.size();
+   *     int cardsPerPlayer = deck.getAllCards().size() / players.size();
         for (Player player : players) {
             for (int i = 0; i < cardsPerPlayer; i++) {
                 player.getPlayerHand().add(deck.nextCard()); // Assuming nextCard() method removes and returns the top card

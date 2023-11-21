@@ -54,4 +54,5 @@ public class User extends Player {
             return getName() + "didnt slap";
         }
     }
+
 }

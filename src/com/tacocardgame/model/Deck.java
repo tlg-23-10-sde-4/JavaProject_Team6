@@ -53,7 +53,7 @@ public class Deck {
 
         return temp.get(0);
     }
-
+//
     public String getAsciiCardType(CardType cardType){      //get ascii art by card type
         return nameTacoMap.get(cardType);
     }

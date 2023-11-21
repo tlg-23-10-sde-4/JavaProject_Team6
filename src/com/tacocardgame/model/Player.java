@@ -72,7 +72,7 @@ public abstract class Player {
         // I think that's better compared in GameController or Round
         // e.g.
 //              int i = 0;
-//                do {
+//             do {
 //                    currentCard = valueOf(players(i).playerFlipsCard());
 //                    currentSays = players(i).playerSays();
 //                    if (currentCard.equals(currentSays)) {
