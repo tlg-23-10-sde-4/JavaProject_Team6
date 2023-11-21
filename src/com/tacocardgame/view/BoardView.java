@@ -4,14 +4,21 @@ import com.tacocardgame.model.*;
 import java.util.Collection;
 
 public class BoardView {
-    private final Board board;
 
     public BoardView(Board board) {
-        this.board = board;
+
     }
 
-    public void show() {
-        Collection<Player> players = board.getPlayers();
+    public BoardView() {
+
+    }
+
+    public void showLoser(Player loser) {
+        System.out.println("Loser of the slap: " + loser.getName());
+    }
+
+    public void show(Collection<Player> players) {
+
 
         // Title and headings
         StringBuilder display = new StringBuilder();
@@ -31,5 +38,8 @@ public class BoardView {
                 display.append(row);
             }
         }
+
     }
+//    BoardView boardView = new BoardView();
+//    boardView.showLoser(lastToSlap);
 }

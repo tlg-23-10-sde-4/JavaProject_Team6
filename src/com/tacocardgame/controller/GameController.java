@@ -3,28 +3,29 @@ package com.tacocardgame.controller;
 import com.apps.util.Console;
 import com.apps.util.Prompter;
 import com.tacocardgame.model.*;
+import com.tacocardgame.view.BoardView;
 
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
-import java.util.Scanner;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
+import java.util.*;
 
 public class GameController {
     private Deck deck;
     private Prompter prompter = new Prompter(new Scanner(System.in));
     private List<Player> players;
     private Pile pile;
-
+    private Player winner;
+    private BoardView boardView;
 
     public GameController() throws IOException {
         this.deck = new Deck();
         this.players = new ArrayList<>();
         this.pile = new Pile();
+        this.boardView = new BoardView();
+
+        BoardView boardView = new BoardView();
+        boardView.show(players); // Assuming 'players' is your List<Player>
 
         // Initialize players here
         players.add(new User("User", 1)); // User player
@@ -36,6 +37,7 @@ public class GameController {
 
 
     public void execute() throws IOException {
+        Console.clear();
         displayWelcomeSequence();
         String userPlayerName = promptForPlayerName();
         // sets the one user
@@ -75,87 +77,57 @@ public class GameController {
 
     public void playGame() {
         boolean gameWon = false;
-        Prompter prompter = new Prompter(new Scanner(System.in));
+        int currentPlayerIndex = 0;
 
-        while (gameWon) {       //gameWon default is false, meaning game NOT won
-            long roundStartTime = System.currentTimeMillis();        //records the start time for each player's turn
-            ExecutorService executorService = Executors.newCachedThreadPool();  //managing slap threads
-            Player lastPlayerToSlap = null;
+        while (!gameWon) {
+            Player currentPlayer = players.get(currentPlayerIndex);
+            Card flippedCard = currentPlayer.takeTurn(pile);
 
-            for (int i = 0; i < players.size(); i++) {
-                Player currentPlayer = players.get(i);
-                String playerStatement = currentPlayer.playerSays();     //gets the word spoken by the current player //
-                System.out.println(currentPlayer.getName() + " says: " + playerStatement);
-
-                if (playerStatement.equalsIgnoreCase(middleCard.getType().getLabel())) {    // used to compare strings of playerSays and middle card name, ignoring case
-                    // slap protocol begins
-                    boolean playerSlapped = false;
-
-                    for (Player player : players) {
-                        currentPlayer.takeTurn();
-
-                        if (player != currentPlayer) {
-                            /*playerid=1 or not*/
-                            //assuming player 1 is only human user, create isUser() in Player class, * PLAYERID
-                            if (player.getPlayerId()!= 1) {        // keith, what are the properties of a player that is not a NPC?
-                                // As in, what would their playerID be? you can define isUser() this way.  #JS 20NOV 1212
-                                executorService.submit(() -> {
-                                    Random random = new Random();
-                                    int npcSlapDelay = random.nextInt(2000);     //random delays between 0-2000ms   //hardcode testing who wins every single time.
-
-                                    try {
-                                        Thread.sleep(npcSlapDelay);     //slap delay intro
-                                    } catch (InterruptedException e) {
-                                        e.printStackTrace();
-                                    }
-                                    System.out.println(player.getName() + "slaps");
-                                    playerSlapped = true;
-                                });
-                            } else {        //human actions
-
-                                String userSlapResult = User.userSlaps();
-                                System.out.println(userSlapResult);
-
-                            }
-                            if (!playerSlapped) {
-                                System.out.println(currentPlayer.getName() + " is the last to slap!");
-                                long endTime = System.currentTimeMillis();      //records the end time slapped for last player calculation
-                                long timeElapsed = endTime - roundStartTime;
-                                System.out.println("Slap time for last player: " + timeElapsed + "milliseconds");
-                                Player.addCardsToPlayerHand;
-                            }
-
-                        }
-                    }
-
-                    //check if player has won
-                    if (lastPlayerToSlap != null) {
-                        lastPlayerToSlap.addCardsToPlayerHand(Player.getPlayerHand()); //TODO: getMiddleStack() or identify () in Pile Adds the entire middle stack to the last slapped player's set of cards
-                        if (Player.getPlayerHand().isEmpty()) { // KP: much simpler than creating a hasNoCards() method  #JS- Fact.
-                            System.out.println(Player.getName() + " wins the game!");   //announceWinner(); when checkCard method shows a player's cards = 0
-                            gameWon = true;
-                        }
-                    }
-
-                    executorService.shutdown();
-                }
+            // Check for a match and handle slap if necessary
+            if (flippedCard.getType().getLabel().equalsIgnoreCase(Objects.requireNonNull(CardType.findByPosition(currentPlayerIndex)).getLabel())) {
+                handleSlap();
             }
+
+            // Check if the game is won
+            gameWon = currentPlayer.getPlayerHand().isEmpty();
+
+            // Move to the next player
+            currentPlayerIndex = (currentPlayerIndex + 1) % players.size();
+
         }
+
+        // Announce winner
+        Player winner = players.get((currentPlayerIndex - 1 + players.size()) % players.size());
+        System.out.println("Game Over! The winner is " + winner.getName());
     }
+
+
+    private void handleSlap() {
+        System.out.println("Match found! Players prepare to slap!");
+        Console.pause(2000); // 2 seconds pause
+
+        // Collect slap times from each player
+        List<Long> slapTimes = new ArrayList<>();
+        for (Player player : players) {
+            slapTimes.add(player.playerSlaps());
+        }
+
+        Player lastToSlap = determineLastToSlap(slapTimes);
+        lastToSlap.addCardsToPlayerHand(pile.dequeToArrayList());
+        pile.clearPile();
+
+        boardView.showLoser(lastToSlap); // Show loser on the board view
+    }
+
+    private Player determineLastToSlap(List<Long> slapTimes) {
+        long maxTime = Collections.max(slapTimes);
+        int lastIndex = slapTimes.indexOf(maxTime);
+        return players.get(lastIndex);
+    }
+
+
 }
 
 
-//    private void welcome() {
-//        Console.clear();
-//
-//        try {
-//            String welcomeBanner = Files.readString(Path.of("images/welcometo.txt"));
-//            String welcomeBanner2 = Files.readString(Path.of("images/tcgcp.txt"));
-//            prompter.info(welcomeBanner);
-//            prompter.info(welcomeBanner2);
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
 
-//        Console.blankLines(2);
-//    }
+
