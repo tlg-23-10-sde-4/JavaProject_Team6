@@ -7,7 +7,7 @@ import java.util.*;
 public abstract class Player {
 
     // FIELDS
-    // static final List<String> tacoList = new ArrayList<>(  //consider making enum class
+
     //        List.of("TACO", "CAT", "GOAT", "CHEESE", "PIZZA"));
     // static int tacoListCounter = 0;    // TODO: (NEED TO DISCUSS) make sure this resets to 0 when a player loses a round
     private static List<Card> playerHand;

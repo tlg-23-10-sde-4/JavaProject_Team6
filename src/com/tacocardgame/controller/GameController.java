@@ -70,16 +70,6 @@ public class GameController {
         return playerName;
     }
 
-  /*  //Distro cards to players
-    private void distributeCards() {
-        int cardsPerPlayer = deck.getAllCards().size() / players.size();
-        for (Player player : players) {
-            for (int i = 0; i < cardsPerPlayer; i++) {
-                player.getPlayerHand().add(deck.nextCard()); // Assuming nextCard() method removes and returns the top card
-            }
-        }
-    }*/
-
     public void playGame() {
         boolean gameWon = false;
         Prompter prompter = new Prompter(new Scanner(System.in));
@@ -123,14 +113,6 @@ public class GameController {
                                 String userSlapResult = User.userSlaps();
                                 System.out.println(userSlapResult);
 
-//                                prompter.info("Press the space bar to slap");
-//                                String userInput = prompter.prompt("");
-//
-//                                if (userInput.equals(" ")) {
-//                                    System.out.println(player.getName() + " slaps");
-//                                    playerSlapped = true;
-//                                }
-
                             }
                             if (!playerSlapped) {
                                 System.out.println(currentPlayer.getName() + " is the last to slap!");
@@ -159,17 +141,6 @@ public class GameController {
     }
 }
 
-//    private boolean gameOver() {
-//        boolean result = false;
-//
-//        // for-each over 'players', asking if any of them are "empty"
-//        for (Player player : players) {
-//            if (player.hasNoCards()) {
-//                result = true;
-//            }
-//        }
-//        return result;
-//    }
 
 //    private void welcome() {
 //        Console.clear();

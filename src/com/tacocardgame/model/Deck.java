@@ -13,7 +13,11 @@ public class Deck {
     public Deck() throws IOException {
         allCards = new ArrayList<>();
 		
-        try {
+        try {  // CJ to answer your question about over-right.  Great question.  Since it's a map there's a key,value pair.
+		// it would only over-write if the keys were the same.
+		
+		//We create the initial array by assigning it to a Map.   
+
             nameTacoMap.put(CardType.TACO, Files.readString(Path.of("resources/images/taco.txt")));
             nameTacoMap.put(CardType.CAT, Files.readString(Path.of("resources/images/cat.txt")));
             nameTacoMap.put(CardType.GOAT, Files.readString(Path.of("resources/images/goat.txt")));
@@ -49,19 +53,8 @@ public class Deck {
         return temp.get(0);
     }
 
-    public void distributeCards(List<Player> players) throws IOException {
-        Deck deck = new Deck();
-        int cardsPerPlayer = deck.getAllCards().size() / players.size();
-        for (Player player : players) {
-            for (int i = 0; i < cardsPerPlayer; i++) {
-                player.getPlayerHand().add(deck.nextCard()); // Assuming nextCard() method removes and returns the top card
-            }
-        }
-    }
-
     public String getAsciiCardType(CardType cardType){      ///get ascii art by card type
         return nameTacoMap.get(cardType);
     }
 
 }
-
