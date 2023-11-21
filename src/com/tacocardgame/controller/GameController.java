@@ -38,7 +38,7 @@ public class GameController {
 
     public void execute() throws IOException {
         Console.clear();
-        displayWelcomeSequence();
+        this.displayWelcomeSequence();
         String userPlayerName = promptForPlayerName();
         // sets the one user
         players.get(0).setName(userPlayerName);
