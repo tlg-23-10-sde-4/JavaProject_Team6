@@ -21,11 +21,11 @@ public class Board {
     private Map<CardType, String> loadCardImages() {
         Map<CardType, String> images = new EnumMap<>(CardType.class);
         try {
-            images.put(CardType.TACO, Files.readString(Path.of("resources/images/taco.txt")));
-            images.put(CardType.CAT, Files.readString(Path.of("resources/images/cat.txt")));
-            images.put(CardType.GOAT, Files.readString(Path.of("resources/images/goat.txt")));
-            images.put(CardType.CHEESE, Files.readString(Path.of("resources/images/cheese.txt")));
-            images.put(CardType.PIZZA, Files.readString(Path.of("resources/images/pizza.txt")));
+            images.put(CardType.TACO, Files.readString(Path.of("resources/images/Taco1.txt")));
+            images.put(CardType.CAT, Files.readString(Path.of("resources/images/Cat1.txt")));
+            images.put(CardType.GOAT, Files.readString(Path.of("resources/images/Goat1.txt")));
+            images.put(CardType.CHEESE, Files.readString(Path.of("resources/images/Cheese1.txt")));
+            images.put(CardType.PIZZA, Files.readString(Path.of("resources/images/Pizza1.txt")));
 
         } catch (IOException e) {
             e.printStackTrace();
