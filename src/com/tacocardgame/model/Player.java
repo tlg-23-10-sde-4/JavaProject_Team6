@@ -32,6 +32,26 @@ public abstract class Player {  //abstract class complete #JS
         return name;
     }
 
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public List<Card> getPlayerHand() {
+        return playerHand;
+    }
+
+    public void setPlayerHand(ArrayList<Card> playerHand) {
+        this.playerHand = playerHand;
+    }
+
+    public int getPlayerId() {
+        return playerId;
+    }
+
+    public void setPlayerId(int playerId) {
+        this.playerId = playerId;
+    }
+
     public void addCardsToPlayerHand(List<Card> cards) {
         this.playerHand.addAll(cards);
     }
@@ -40,9 +60,9 @@ public abstract class Player {  //abstract class complete #JS
         Card cardFlipped = playerFlipsCard(pile);
         CardType cardType = cardFlipped.getType();
         String asciiArt = Deck.getAsciiCardType(cardType);
-        String sayWord = (String) playerSays(cardType.getPosition());
+        String playerStatement = (String) playerSays(cardType.getPosition());
 
-        System.out.println(getName() + " flipped " + cardFlipped + " and says " + sayWord);
+        System.out.println(getName() + " flipped " + cardFlipped + " and says " + playerStatement);
         System.out.println(asciiArt);
     }
 
