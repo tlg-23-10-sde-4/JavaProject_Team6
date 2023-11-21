@@ -18,6 +18,7 @@ public class User extends Player {
         setPlayerId(playerId);
         setPlayerHand(playerHand);
     }
+    players.add(new User("player", 1, new ArrayList<>(playerHand)));
 
     // CANNOT test in IntelliJ; instead you must copy the method in Jshell and run it from there
     // The method ALMOST works correctly
