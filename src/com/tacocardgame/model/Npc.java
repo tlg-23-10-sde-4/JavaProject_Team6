@@ -22,7 +22,10 @@ public class Npc extends Player {
         setPlayerHand(playerHand);
     }
 
-
+    players.add(new Npc("Chuck", 2, new ArrayList<>(playerHand)));
+    players.add(new Npc("CJ", 3, new ArrayList<>(playerHand)));
+    players.add(new Npc("Justin", 4, new ArrayList<>(playerHand)));
+    players.add(new Npc("Keith", 5, new ArrayList<>(playerHand)));
 
 
 
