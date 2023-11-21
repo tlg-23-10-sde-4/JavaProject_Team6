@@ -15,20 +15,23 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 public class GameController {
-    private Deck deck = new Deck();
+    private Deck deck;
     private Prompter prompter = new Prompter(new Scanner(System.in));
-    private List<Player> players = new ArrayList<>();
-    private final Pile pile = new Pile(); // Pile instance
+    private List<Player> players;
+    private Pile pile;
 
 
     public GameController() throws IOException {
         this.deck = new Deck();
+        this.players = new ArrayList<>();
+        this.pile = new Pile();
+
         // Initialize players here
-        players.add(new Player("User", 1)); // User player
-        players.add(new Player("Chuck", 2)); // NPC players
-        players.add(new Player("CJ", 3));
-        players.add(new Player("Justin", 4));
-        players.add(new Player("Keith", 5));
+        players.add(new User("User", 1)); // User player
+        players.add(new Npc("Chuck", 2)); // NPC players
+        players.add(new Npc("CJ", 3));
+        players.add(new Npc("Justin", 4));
+        players.add(new Npc("Keith", 5));
     }
 
 
@@ -37,7 +40,7 @@ public class GameController {
         String userPlayerName = promptForPlayerName();
         // sets the one user
         players.get(0).setName(userPlayerName);
-        distributeCards();  //distribute cards evenly amongst players
+        deck.distributeCards(players);  //distribute cards evenly amongst players
         playGame();
     }
 

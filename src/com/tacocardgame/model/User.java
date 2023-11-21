@@ -5,18 +5,21 @@ import com.apps.util.Prompter;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Scanner;
+import java.util.concurrent.*;
 
 public class User extends Player {
 
+    public User(String name) {
+        super(name);
+    }
+
     public User(String name, int playerId) {
-        setName(name);
-        setPlayerId(playerId);
+        super(name, playerId);
     }
 
     public User(String name, int playerId, ArrayList<Card> playerHand) {
-        setName(name);
-        setPlayerId(playerId);
-        setPlayerHand(playerHand);
+        super(name, playerId, playerHand);
+
     }
 
     // CANNOT test in IntelliJ; instead you must copy the method in Jshell and run it from there
@@ -26,33 +29,25 @@ public class User extends Player {
 
     @Override
     public long playerSlaps() {
-        long result = 1234567890;   // CJ: for testing - see if we are properly overriding the super
-        System.out.println("Scanner should load next"); // CJ: for testing
-
-        Scanner playerSlap = new Scanner(System.in);
-        String userInput = playerSlap.nextLine();
-        if (userInput.equalsIgnoreCase(" ")) {
-            result = new Date().getTime();
-        }
-        return result;
-    }
-
-    public static String userSlaps() {
+        // User input logic for slapping
         long startTime = System.currentTimeMillis();
+        long maxDuration = 2510; // 2.51 seconds in milliseconds
 
         Prompter prompter = new Prompter(new Scanner(System.in));
-        prompter.prompt("Press the space bar to slap: ");
-        String userInput = prompter.prompt("");
+        ExecutorService executor = Executors.newSingleThreadExecutor();
+        Future<String> future = executor.submit(() -> prompter.prompt("Press the space bar to slap: "));
 
-        long endTime = System.currentTimeMillis(); //record the endtime
-        long slapTime = endTime - startTime;
-
-        if (userInput.equals(" ")) {
-            System.out.println(Player.getName() + " slaps");
-            return getName() + " slap time: " + startTime +"ms";
-        } else {
-            return getName() + "didnt slap";
+        try {
+            future.get(maxDuration, TimeUnit.MILLISECONDS);
+        } catch (InterruptedException | ExecutionException e) {
+            // Handle exceptions here
+        } catch (TimeoutException e) {
+            future.cancel(true); // Cancel the prompt if it exceeds the time limit
         }
-    }
 
+        executor.shutdownNow(); // Shutdown the executor service
+
+        long endTime = System.currentTimeMillis();
+        return Math.min(endTime - startTime, maxDuration); // Return slap time, but not more than 2.51 seconds
+    }
 }

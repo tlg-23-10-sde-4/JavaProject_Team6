@@ -6,7 +6,7 @@ import java.nio.file.Path;
 
 public class Card {
 
-    private CardType type;
+    private final CardType type;
     private String image;
 
     public Card(CardType type) {

@@ -11,32 +11,24 @@ public class Npc extends Player {
 
     private String name;
 
-    public Npc(String name, int playerID) {
-        getName();
-        getPlayerId();
+    public Npc(String name, int playerId) {
+        super(name, playerId); // Call the constructor of the superclass
     }
 
-    public Npc(String name, int playerID, ArrayList<Card> playerHand) {
-        getName();
-        getPlayerId();
-        setPlayerHand(playerHand);
+    public Npc(String name, int playerId, ArrayList<Card> playerHand) {
+        super(name, playerId, playerHand); // Call the constructor of the superclass
     }
 
     @Override
     public long playerSlaps() {
-
-//        double doubleWaitTime = 1000 + (1000 * Math.random());   // Gives a double value between 1000 and 2000, roughly
-//        //TODO: I'm sure there's a better way to pass a random long to this.wait()
-//        long waitTime = Math.round(doubleWaitTime); // converts the double to long
-//
-//        sleep(waitTime);
-//
-//        // the time - down to milliseconds - of the Npc Player slap
-//        // SHOULD!!! happen after the wait as the code is read sequentially
-        long result = new Date().getTime();
-
-        // For use in an ArrayList<> or similar so we can determine the loser
-        return result;
+        // Simulate a delay for NPC reaction time
+        long delay = (long)(1000 + Math.random() * 1000); // Delay between 1 to 2 seconds
+        try {
+            Thread.sleep(delay);
+        } catch (InterruptedException e) {
+            // Handle exception
+        }
+        return System.currentTimeMillis(); // Return the current time after the delay
     }
 
     public void setName(String name) {
