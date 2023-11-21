@@ -17,7 +17,7 @@ public class Npc extends Player {
     }
 
     @Override
-    public long playerSlaps() {
+    public Long playerSlaps() {
         // Simulate a delay for NPC reaction time
         long delay = (long)(1000 + Math.random() * 1000); // Delay between 1 to 2 seconds
         try {
