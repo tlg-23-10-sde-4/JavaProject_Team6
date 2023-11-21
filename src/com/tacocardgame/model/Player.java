@@ -11,7 +11,8 @@ public abstract class Player {  //abstract class complete #JS
 
     // CONSTRUCTOR
 
-    public Player() {
+    public Player(String name) {
+        this.name = name;
 
     }
 
