@@ -40,7 +40,7 @@ public class GameController {
         String userPlayerName = promptForPlayerName();
         // sets the one user
         players.get(0).setName(userPlayerName);
-        deck.distributeCards();  //distribute cards evenly amongst players
+        deck.distributeCards(players);  //distribute cards evenly amongst players
         playGame();
     }
 

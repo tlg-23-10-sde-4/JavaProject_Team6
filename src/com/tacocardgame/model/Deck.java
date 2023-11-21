@@ -8,7 +8,7 @@ import java.util.NoSuchElementException;
 
 public class Deck {
     private List<Card> allCards = new ArrayList<>();
-    Map<CardType, String> nameTacoMap = new HashMap<>();
+    private static Map<CardType, String> nameTacoMap = new HashMap<>();
 
     public Deck() throws IOException {
         allCards = new ArrayList<>();
@@ -49,15 +49,15 @@ public class Deck {
         return temp.get(0);
     }
 
-    public void distributeCards(ArrayList<Player> players) throws IOException {
-        Deck deck = new Deck();
-        int cardsPerPlayer = deck.getAllCards().size() / players.size();
+    public void distributeCards(List<Player> players) {
+        int cardsPerPlayer = allCards.size() / players.size();
         for (Player player : players) {
             for (int i = 0; i < cardsPerPlayer; i++) {
-                player.getPlayerHand().add(deck.nextCard()); // Assuming nextCard() method removes and returns the top card
+                player.getPlayerHand().add(nextCard());
             }
         }
     }
+
 
     public static String getAsciiCardType(CardType cardType){      ///get ascii art by card type
         return nameTacoMap.get(cardType);
