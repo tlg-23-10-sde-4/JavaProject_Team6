@@ -54,17 +54,17 @@ public class GameController {
             System.out.println(welcomeImages.get(i)); // Display the image
 
             if (i < welcomeImages.size() - 1) {
-                Console.pause(500); // pause for 0.5 seconds before clearing the screen
-                Console.clear(); // clear the screen for all but the last image
+                Console.pause(500); // Pause for 0.5 seconds for all images except the last
+                Console.clear();
+            } else {
+                Console.pause(20000); //longer pause for the last image, i.e., 20 seconds
             }
         }
-        Console.pause(8000); // trying to long pause for the last image, pause for 8 seconds
+        Console.clear(); // clear the screen after the final pause
     }
 
     private List<String> loadWelcomeImages() throws IOException {
         List<String> images = new ArrayList<>();
-        String[] imageFiles = {"taco.txt", "cat.txt", "goat.txt", "cheese.txt", "pizza.txt", "tcgcp.txt"};      //updated
-
         for (int i = 1; i <= 8; i++) {
             String file = "resources/images/welcome-" + i + ".txt";
             images.add(Files.readString(Path.of(file)));
