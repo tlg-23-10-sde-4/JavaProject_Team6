@@ -109,7 +109,7 @@ public abstract class Player {
         this.name = name;
     }
 
-    public String getName() {
+    public static String getName() {
         return this.name;
     }
 
@@ -129,11 +129,22 @@ public abstract class Player {
         this.playerId = playerId;
     }
 
-    public boolean isUser() {
-        return isUser;
-    }
+//    public boolean isUser() {
+//        return isUser;
+//    }
+//
+//    public void setUser(boolean isUser) {
+//        this.isUser = isUser;
+//    }
 
-    public void setUser(boolean isUser) {
-        this.isUser = isUser;
+
+    public void takeTurn(Pile pile) {
+        Card cardFlipped = playerFlipsCard(pile);
+        CardType cardType = cardFlipped.getType();
+        String asciiArt = Deck.getAsciiCardType(cardType);
+        String sayWord = playerSays(cardType.getPosition());
+
+        System.out.println(getName() + " flipped " + cardFlipped + " and says " + sayWord);
+        System.out.println(asciiArt);
     }
 }

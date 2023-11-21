@@ -8,6 +8,7 @@ import java.util.NoSuchElementException;
 
 public class Deck {
     private List<Card> allCards = new ArrayList<>();
+    Map<CardType, String> nameTacoMap = new HashMap<>();   //moved this outside of the try for ascii
 
     public Deck() throws IOException {
         allCards = new ArrayList<>();
@@ -17,7 +18,7 @@ public class Deck {
 		
 		//We create the initial array by assigning it to a Map.   
 		
-            Map<CardType, String> nameTacoMap = new HashMap<>();
+            //Map<CardType, String> nameTacoMap = new HashMap<>();
             nameTacoMap.put(CardType.TACO, Files.readString(Path.of("resources/images/taco.txt")));
             nameTacoMap.put(CardType.CAT, Files.readString(Path.of("resources/images/cat.txt")));
             nameTacoMap.put(CardType.GOAT, Files.readString(Path.of("resources/images/goat.txt")));
@@ -51,6 +52,10 @@ public class Deck {
         allCards.remove(0);
 
         return temp.get(0);
+    }
+
+    public String getAsciiCardType(CardType cardType){      //get ascii art by card type
+        return nameTacoMap.get(cardType);
     }
 
 }
