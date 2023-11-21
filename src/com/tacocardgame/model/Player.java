@@ -63,7 +63,7 @@ public abstract class Player {  //abstract class complete #JS
         String asciiArt = Deck.getAsciiCardType(cardType);
         String playerStatement = (String) playerSays(cardType.getPosition());
 
-        System.out.println(getName() + " flipped " + cardFlipped + " and says " + playerStatement);
+        System.out.println(getName() + " flipped " + cardFlipped.getType().getLabel() + " and says " + playerSays(1));
         System.out.println(asciiArt);
         return cardFlipped;
     }

@@ -17,6 +17,7 @@ public class GameController {
     private Pile pile;
     private Player winner;
     private BoardView boardView;
+    private int playerPosition = 0;
 
     public GameController() throws IOException {
         this.deck = new Deck();
@@ -38,7 +39,7 @@ public class GameController {
 
     public void execute() throws IOException {
         Console.clear();
-        displayWelcomeSequence();
+        this.displayWelcomeSequence();
         String userPlayerName = promptForPlayerName();
         // sets the one user
         players.get(0).setName(userPlayerName);
