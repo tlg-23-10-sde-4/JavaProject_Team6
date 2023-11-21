@@ -61,7 +61,7 @@ public class GameController {
                 Console.pause(20000); //longer pause for the last image, i.e., 20 seconds
             }
         }
-        Console.clear(); // clear the screen after the final pause
+        Console.clear();
     }
 
     private List<String> loadWelcomeImages() throws IOException {
@@ -98,7 +98,7 @@ public class GameController {
             Console.pause(1500);
             // Check for a match and handle slap if necessary
             if (flippedCard.getType().getLabel().equalsIgnoreCase(saidCard)) {
-//                    currentSpokenIndex = 0;
+
                 handleSlap();
             }
 
