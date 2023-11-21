@@ -86,6 +86,7 @@ public class GameController {
             Player currentPlayer = players.get(currentPlayerIndex);
             gameWon = currentPlayer.getPlayerHand().isEmpty();
             Card flippedCard = currentPlayer.takeTurn(pile);
+            Console.blankLines(2);
             String saidCard = currentPlayer.playerSays(currentPlayerIndex);
             System.out.println(saidCard);
             if (currentSpokenIndex < 5) {
@@ -94,7 +95,7 @@ public class GameController {
             else {
                 currentSpokenIndex = 0;
             }
-            Console.pause(750);
+            Console.pause(1500);
             // Check for a match and handle slap if necessary
             if (flippedCard.getType().getLabel().equalsIgnoreCase(saidCard)) {
 //                    currentSpokenIndex = 0;
@@ -103,7 +104,7 @@ public class GameController {
 
             // Move to the next player
             currentPlayerIndex = (currentPlayerIndex + 1) % players.size();
-
+            Console.clear();
         }                    // Check if the game is won
         while (gameWon == false);
 

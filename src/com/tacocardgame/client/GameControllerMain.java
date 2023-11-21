@@ -11,7 +11,6 @@ public class GameControllerMain {
             app.execute();
         } catch (IOException e) {
             e.printStackTrace();
-
         }
     }
 }
