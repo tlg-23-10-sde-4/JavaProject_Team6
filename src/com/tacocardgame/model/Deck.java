@@ -8,15 +8,13 @@ import java.util.NoSuchElementException;
 
 public class Deck {
     private List<Card> allCards = new ArrayList<>();
-    Map<CardType, String> nameTacoMap = new HashMap<>();   //moved this outside of the try for ascii
+    Map<CardType, String> nameTacoMap = new HashMap<>();
 
     public Deck() throws IOException {
         allCards = new ArrayList<>();
 		
-        try {  // CJ to answer your question about over-right.  Great question.  Since it's a map there's a key,value pair.
-		// it would only over-write if the keys were the same.
-		
-		//We create the initial array by assigning it to a Map.   
+        try {
+
 
             nameTacoMap.put(CardType.TACO, Files.readString(Path.of("resources/images/taco.txt")));
             nameTacoMap.put(CardType.CAT, Files.readString(Path.of("resources/images/cat.txt")));

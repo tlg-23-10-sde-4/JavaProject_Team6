@@ -15,14 +15,17 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 public class GameController {
-    private Deck deck = new Deck();
+    private Deck deck;
     private Prompter prompter = new Prompter(new Scanner(System.in));
-    private List<Player> players = new ArrayList<>();
-    private final Pile pile = new Pile(); // Pile instance
+    private List<Player> players;
+    private Pile pile;
 
 
     public GameController() throws IOException {
         this.deck = new Deck();
+        this.players = new ArrayList<>();
+        this.pile = Pile();
+
         // Initialize players here
         players.add(new Player("User", 1)); // User player
         players.add(new Player("Chuck", 2)); // NPC players

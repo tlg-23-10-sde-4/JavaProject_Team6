@@ -4,7 +4,7 @@ import java.util.*;
 
 public class Pile {
 
-    private Deque<Card> pile = new ArrayDeque<>();
+    private final Deque<Card> pile = new ArrayDeque<>();
 
     public void addToPile(Card card) {
         pile.push(card);
@@ -16,7 +16,7 @@ public class Pile {
 
     public ArrayList<Card> dequeToArrayList() {
         ArrayList<Card> iteratedArrayList = new ArrayList<>();
-        while (pile.isEmpty() == false) {
+        while (!pile.isEmpty()) {
             Card card = pile.getFirst();
             pile.remove();
             iteratedArrayList.add(card);
