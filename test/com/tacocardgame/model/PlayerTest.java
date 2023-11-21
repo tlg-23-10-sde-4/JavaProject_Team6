@@ -10,6 +10,7 @@ import java.lang.Iterable;
 import java.util.Iterator;
 
 import static com.tacocardgame.model.CardType.*;
+import static com.tacocardgame.model.Pile.*;
 
 public class PlayerTest {
 
@@ -24,17 +25,20 @@ public class PlayerTest {
 
     @Before
     public void initialize() {
+//        pile.clearPile();
         playerHand = new ArrayList<>(Arrays.asList(taco, cat, goat, cheese, pizza, taco));
         player = new Player("player", 3, (playerHand));
         pile.addToPile(cheese);
+        pile.addToPile(taco);
+        pile.addToPile(taco);
+        pile.addToPile(taco);
         pile.addToPile(taco);
     }
 
     @Test
     public void pile_shouldBeInstantiated() {
-        Card card = null;
-        pile.addToPile(card);
-        System.out.println(pile.showTopOfPile());
+        Card card = pile.showTopOfPile();
+        System.out.println(card.getType());
     }
 
     @Test
@@ -81,7 +85,7 @@ public class PlayerTest {
 
     @Test
     public void addCardsToPlayerHand_shouldAddTheSelectedCardsToBottomOfPlayerHand() {
-        ArrayList<Card> pile = new ArrayList<>(Arrays.asList(pizza, cheese, goat, cat, taco));
+
         System.out.print("Player hand BEFORE adding cards: ");
         for (Card card : playerHand) {
             System.out.print(card.getType() + " ");
@@ -92,6 +96,15 @@ public class PlayerTest {
         for (Card card1 : playerHand) {
             System.out.print(card1.getType() + " ");
         }
+    }
+
+
+    @Test
+    public void addCardsToPlayerHand_shouldNotWork_whenAddingNullCard() {
+        pile.clearPile();
+        pile.addToPile(null);
+        player.addCardsToPlayerHand(pile);
+
     }
 
 

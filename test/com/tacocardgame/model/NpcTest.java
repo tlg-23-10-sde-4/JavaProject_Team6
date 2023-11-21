@@ -94,18 +94,18 @@ public class NpcTest {
         System.out.println(time - time7);
     }
 
-    @Test
-    public void addCardsToPlayerHand_shouldAddTheSelectedCardsToBottomOfPlayerHand() {
-        ArrayList<Card> pile = new ArrayList<>(Arrays.asList(pizza, cheese, goat, cat, taco));
-        System.out.print("Player hand BEFORE adding cards: ");
-        for (Card card : playerHand) {
-            System.out.print(card.getType() + " ");
-        }
-        System.out.println("\n");
-        Npc.addCardsToPlayerHand(pile);
-        System.out.print("Player hand AFTER adding cards: ");
-        for (Card card1 : playerHand) {
-            System.out.print(card1.getType() + " ");
-        }
-    }
+//    @Test
+//    public void addCardsToPlayerHand_shouldAddTheSelectedCardsToBottomOfPlayerHand() {
+//        ArrayList<Card> pile = new ArrayList<>(Arrays.asList(pizza, cheese, goat, cat, taco));
+//        System.out.print("Player hand BEFORE adding cards: ");
+//        for (Card card : playerHand) {
+//            System.out.print(card.getType() + " ");
+//        }
+//        System.out.println("\n");
+//        Npc.addCardsToPlayerHand(pile);
+//        System.out.print("Player hand AFTER adding cards: ");
+//        for (Card card1 : playerHand) {
+//            System.out.print(card1.getType() + " ");
+//        }
+//    }
 }

@@ -1,5 +1,9 @@
 package com.tacocardgame.model;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+
 public class Card {
 
     private CardType type;
@@ -14,7 +18,7 @@ public class Card {
         this.image = image;
     }
 
-    public void show(String image) {
+    public void show() {
 
         System.out.println(image);
     }

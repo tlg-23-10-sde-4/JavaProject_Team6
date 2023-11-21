@@ -15,6 +15,21 @@ public class Pile {
         return pile.peekFirst();
     }
 
+    public ArrayList<Card> dequeToArrayList() {
+        ArrayList<Card> iteratedArrayList = new ArrayList<>();
+        while (pile.isEmpty() == false) {
+            Card card = pile.getFirst();
+            pile.remove();
+            iteratedArrayList.add(card);
+        }
+        return iteratedArrayList;
+    }
+
+//    public Deque pileToDeque(Pile pile) {
+//        ArrayDeque<Card> arrayDequePile = new ArrayDeque<Card>(pile);
+//
+//    }
+
     public int getSize() {
         return pile.size();
     }

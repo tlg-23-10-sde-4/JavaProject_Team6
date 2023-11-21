@@ -2,10 +2,7 @@
 
 package com.tacocardgame.model;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.NoSuchElementException;
+import java.util.*;
 
 public class Player {
 
@@ -96,8 +93,10 @@ public class Player {
         return timeOfSlap;
     }
 
-    public void addCardsToPlayerHand(List<Card> cards) {
-        playerHand.addAll(cards);
+    public void addCardsToPlayerHand(Pile pile) {
+        ArrayList<Card> pileAsArrayList;
+        pileAsArrayList = pile.dequeToArrayList();
+        playerHand.addAll(pileAsArrayList);
     }
 
     // GETTERS & SETTERS

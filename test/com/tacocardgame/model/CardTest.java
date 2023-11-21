@@ -13,14 +13,15 @@ import static org.junit.Assert.*;
 public class CardTest {
 
     @Before
-    public void setUp() throws Exception {
+    public void setUp() {
+
     }
 
     @Test
     public void show_shouldShowTheReferencedFile() throws IOException {
-        Card card = new Card(CHEESE);
+        Card card = new Card(TACO);
         String image = Files.readString(Path.of("resources/images/"+ card.getType() + ".txt"));
-        card.show(image);
+        card.show();
     }
 
     @Test

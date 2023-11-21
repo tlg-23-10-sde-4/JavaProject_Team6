@@ -12,7 +12,6 @@ import static org.junit.Assert.*;
 public class PileTest {
 
     Pile pile = new Pile();
-    Deque<Card> testPile;
     Card taco = new Card(TACO);
     Card cat = new Card(CAT);
     Card goat = new Card(GOAT);
@@ -50,7 +49,6 @@ public class PileTest {
     public void showTopOfPile_shouldReturnLastCardFromBefore() {
         card = pile.showTopOfPile();
         System.out.println(card.getType());
-        System.out.println("And now");
     }
 
     @Test
