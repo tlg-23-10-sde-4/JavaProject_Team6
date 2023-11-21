@@ -24,37 +24,48 @@ public class GameController {
     private final Pile pile = new Pile(); // Pile instance
 
 
-    public GameController(Deck deck, List<Player> players) throws IOException {
-        this.deck = deck;
-        this.players = players;
+    public GameController() throws IOException {
+        this.deck = new Deck();
+        // Initialize players here
+        players.add(new Player("User", 1)); // User player
+        players.add(new Player("Chuck", 2)); // NPC players
+        players.add(new Player("CJ", 3));
+        players.add(new Player("Justin", 4));
+        players.add(new Player("Keith", 5));
     }
 
-    public void execute() {
-        welcomeAndPromptForHelp();
-        String playerName = promptForPlayerName();
-        int playerCount = promptForPlayerCount();
 
-        createPlayers(playerName, playerCount - 1);
-
+    public void execute() throws IOException {
+        displayWelcomeSequence();
+        String userPlayerName = promptForPlayerName();
+        // sets the one user
+        players.get(0).setName(userPlayerName);
         distributeCards();  //distribute cards evenly amongst players
         playGame();
     }
 
-    private void distributeCards() {   // method that distributes cards to players from Deck #js
+
+    private void displayWelcomeSequence() throws IOException {
+        List<String> welcomeImages = loadWelcomeImages();
+        for (String image : welcomeImages) {
+            Console.clear();
+            System.out.println(image);
+            try {
+                Thread.sleep(500); // display each image for 0.5 seconds
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+        Console.clear();
     }
 
-    private void createPlayers(String playerName, int i) {  // method that creates players and player number #js  //does i return npc count?
-        Player player = new Player();
-        player.setName(playerName);
-        players.add(player);  // still need method for player.add; #js //updateName in Board #kp
-    }
-
-
-    private void welcomeAndPromptForHelp() {
-        //SOUT with playerName from player.name() and ask if you want further instructions #js
-        //if no, proceed to start screen #js
-        //if yes, sout message: String welcomeBanner = Files.readString(Path.of("images/gameRules.txt"));
-
+    private List<String> loadWelcomeImages() throws IOException {
+        List<String> images = new ArrayList<>();
+        for (int i = 1; i <= 8; i++) {
+            String file = "resources/images/welcome-" + i + ".txt";
+            images.add(Files.readString(Path.of(file)));
+        }
+        return images;
     }
 
     private String promptForPlayerName() {
@@ -62,13 +73,17 @@ public class GameController {
         return playerName;
     }
 
-    /*
-     *  Below is generic map of playGame().  Time during slap environment needs to be added.
-     *  Maybe look at System.currentTimeMillis() for round timing???
-     */
+    //Distro cards to players
+    private void distributeCards() {
+        int cardsPerPlayer = deck.getAllCards().size() / players.size();
+        for (Player player : players) {
+            for (int i = 0; i < cardsPerPlayer; i++) {
+                player.getPlayerHand().add(deck.nextCard()); // Assuming nextCard() method removes and returns the top card
+            }
+        }
+    }
 
     private void playGame() {
-        Card middleCard = deck.nextCard();  //draws the first card(top card) from the deck
         boolean gameWon = false;
         Prompter prompter = new Prompter(new Scanner(System.in));
 
