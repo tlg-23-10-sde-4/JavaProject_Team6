@@ -76,7 +76,7 @@ public abstract class Player {  //abstract class complete #JS
         return card;
     }
 
-    public Object playerSays(int position) { // CJ: test successful 11/19
+    public String playerSays(int position) { // CJ: test successful 11/19
         CardType findPosition = CardType.findByPosition(position);
         return findPosition != null ? findPosition.getLabel() : "Something is wrong, CJ help!";
 
