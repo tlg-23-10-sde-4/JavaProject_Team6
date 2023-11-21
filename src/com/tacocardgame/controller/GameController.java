@@ -17,6 +17,7 @@ public class GameController {
     private Pile pile;
     private Player winner;
     private BoardView boardView;
+    private int playerPosition = 0;
 
     public GameController() throws IOException {
         this.deck = new Deck();
