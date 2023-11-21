@@ -67,29 +67,6 @@ public abstract class Player {
         }
     }
 
-    public void playerChecks() {    // What is the player checking here?
-        // If we're checking for a match between playerFlipsCard and playerSays
-        // I think that's better compared in GameController or Round
-        // e.g.
-//              int i = 0;
-//             do {
-//                    currentCard = valueOf(players(i).playerFlipsCard());
-//                    currentSays = players(i).playerSays();
-//                    if (currentCard.equals(currentSays)) {
-//                        //for (Player player : players)
-//                            playerSlaps();
-//                        ?break?
-//                    }
-//                    else {
-//                        i++;
-//                    }     // returns to the top of the "do" statement but with i incremented
-//                    if (i == 5) {   // <players> has 0-4; if i == 5 then reset to 0, thus completing the circle
-//                        i = 0;
-//                    }
-//                }
-//                while (player.getPlayerHand().isEmpty()) == false);
-    }
-
     public long playerSlaps() {
         long timeOfSlap = 987654321;    // CJ: for testing - see if it's properly overwritten
         return timeOfSlap;

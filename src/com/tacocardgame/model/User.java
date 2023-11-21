@@ -21,7 +21,7 @@ public class User extends Player {
 
     // CANNOT test in IntelliJ; instead you must copy the method in Jshell and run it from there
     // The method ALMOST works correctly
-    // Currently need to press spacebar AND THEN enter
+    // /Currently need to press spacebar AND THEN enter
     // If you press any other combination you will get the default value
 
     @Override
