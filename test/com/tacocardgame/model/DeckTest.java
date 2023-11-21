@@ -13,7 +13,7 @@ import static com.tacocardgame.model.CardType.*;
 import static org.junit.Assert.*;
 
 public class DeckTest {
-
+    private List<Card> allCards = new ArrayList<>();
     Deck deck = new Deck();
     Pile pile = new Pile();
     Card taco = new Card(TACO);
@@ -30,6 +30,7 @@ public class DeckTest {
 
     @Before
     public void setUp() throws Exception {
+        Deck deck = new Deck();
         playerHand = new ArrayList<>();
         players.add(new User("player", 1, new ArrayList<>(playerHand)));
         players.add(new Npc("Chuck", 2, new ArrayList<>(playerHand))); // NPC players
@@ -50,12 +51,27 @@ public class DeckTest {
     }
 
     @Test
-    public void getAllCards() {
+    public void getAllCards_shouldReturnTrue_lengthIs55() {
+        assertTrue(deck.getAllCards().size() == 55);
     }
 
     @Test
-    public void nextCard() {
+    public void nextCard_shouldReturnTrue_whenComparingSizeBeforeCalled() {
+        int sizeBefore = deck.getAllCards().size();
+        int sizeAfter;
+        deck.nextCard();
+        sizeAfter = deck.getAllCards().size();
+        assertTrue(sizeBefore == (sizeAfter + 1));
     }
+
+    @Test
+    public void distributeCards_shouldReturnTrue_when5Players() throws IOException {
+        deck.distributeCards(players);
+        for (Player player : players) {
+            assertTrue(this.playerHand.size() == 11);
+        }
+    }
+
 
     @Test
     public void distributeCards() throws IOException {
