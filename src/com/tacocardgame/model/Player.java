@@ -1,120 +1,77 @@
-
-
 package com.tacocardgame.model;
 
 import java.util.*;
 
-public abstract class Player {
+public abstract class Player {  //abstract class complete #JS
 
-    // FIELDS
-
-    //        List.of("TACO", "CAT", "GOAT", "CHEESE", "PIZZA"));
-    // static int tacoListCounter = 0;    // TODO: (NEED TO DISCUSS) make sure this resets to 0 when a player loses a round
-    private static List<Card> playerHand;
+    // TODO: (NEED TO DISCUSS) make sure this resets to 0 when a player loses a round
+    private List<Card> playerHand = new ArrayList<>();
     private String name;
     private int playerId;
 
-    private boolean isUser;
-
     // CONSTRUCTOR
 
-    // probably only need one constructor
     public Player() {
 
     }
 
     public Player(String name, int playerId) {
-        setName(name);
-        setPlayerId(playerId);
+        this.name = name;
+        this.playerId = playerId;
     }
 
     public Player(String name, int playerId, ArrayList<Card> playerHand) {
-        setName(name);
-        setPlayerId(playerId);
-        setPlayerHand(playerHand);
+        this.name = name;
+        this.playerId = playerId;
+        this.playerHand = playerHand;
     }
 
     // METHODS
 
-
-    public static Card playerFlipsCard(Pile pile) {
-        if (playerHand.isEmpty()) {
-            throw new NoSuchElementException("No cards are left to flip");
-        }
-
-        Card card = playerHand.remove(0); // removes the first card from playerHand
-
-        if (card == null) {
-            throw new NullPointerException("The card you tried to flip is null");
-        }
-
-        pile.addToPile(card);  // adds this instance of card to the pile.  This is why instances are super important.
-        return card;  // now we can use Player.card as our clearing pile everytime we have a slap.
-
+    public String getName() {
+        return name;
     }
 
-    public static String playerSays(int position) { // CJ: test successful 11/19
-        CardType cardType = CardType.findByPosition(position);
-        if (cardType != null) {
-            return cardType.getLabel();
-        } else {
-            return "Something is wrong with Player.playerSays";
-        }
-    }
-
-    public long playerSlaps() {
-        long timeOfSlap = 987654321;    // CJ: for testing - see if it's properly overwritten
-        return timeOfSlap;
-    }
-
-    public void addCardsToPlayerHand(Pile pile) {
-        ArrayList<Card> pileAsArrayList;
-        pileAsArrayList = pile.dequeToArrayList();
-        playerHand.addAll(pileAsArrayList);
-    }
-
-    // GETTERS & SETTERS
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public static String getName() {
-        return this.name;
-    }
-
-    public static List<Card> getPlayerHand() {
+    public List<Card> getPlayers() {
         return playerHand;
     }
 
-    public static void setPlayerHand(ArrayList<Card> playerHand) {
-        Player.playerHand = playerHand;
+    public void setPlayerHand(ArrayList<Card> playerHand){
+        this.playerHand = playerHand;
     }
 
-    public int getPlayerId() {
-        return playerId;
-    }
-
-    void setPlayerId(int playerId) {
+    public void setPlayerId(int playerId) {
         this.playerId = playerId;
     }
 
-//    public boolean isUser() {
-//        return isUser;
-//    }
-//
-//    public void setUser(boolean isUser) {
-//        this.isUser = isUser;
-//    }
-
+    public void addCardsToPlayerHand(List<Card> cards) {
+        this.playerHand.addAll(cards);
+    }
 
     public void takeTurn(Pile pile) {
         Card cardFlipped = playerFlipsCard(pile);
         CardType cardType = cardFlipped.getType();
         String asciiArt = Deck.getAsciiCardType(cardType);
-        String sayWord = playerSays(cardType.getPosition());
+        String playerStatement = playerSays(cardType.getPosition());
 
-        System.out.println(getName() + " flipped " + cardFlipped + " and says " + sayWord);
+        System.out.println(getName() + " flipped " + cardFlipped + " and says " + playerStatement);
         System.out.println(asciiArt);
     }
+
+    public Card playerFlipsCard(Pile pile) {
+        if (playerHand.isEmpty()) {
+            throw new NoSuchElementException("No cards are left to flip");
+        }
+        Card card = playerHand.remove(0); // removes the first card from playerHand
+        pile.addToPile(card);  // adds this instance of card to the pile.  This is why instances are super important.
+        return card;
+    }
+
+    public String playerSays(int position) { // CJ: test successful 11/19
+        CardType findPosition = CardType.findByPosition(position);
+        return findPosition != null ? findPosition.getLabel() : "Something is wrong, CJ help!";
+    }
+
+    // implement the full version in class Npc and class User.
+    public abstract long playerSlaps();
 }
