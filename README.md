@@ -24,6 +24,10 @@ Our group attempted to bring the lively children's game [Taco Cat Goat Cheese Pi
 
 While we did get a working product, we did not come close to meeting our aspirational goals outlined in our conversation.
 
+## Lessons
+
+1. We would have benefited greatly from an experienced team lead. Every conversation we had with Jay catapulted us forward for a short time; we proceeded at a glacial pace otherwise.
+
 ## Credits
 
 This game was created as part of TLG 23.10BL SDE4's Week 6 Project. 
