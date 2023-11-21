@@ -1,0 +1,130 @@
+Game will begin with "press enter to start" User will press enter
+
+//TODO: We need a start Message to display after the Welcome message, player registration, and games rules.
+//  TODO: gameStart() allows user to press enter to start the game
+		CJ: Lines 1-4 aren't well defined. I think we want a concrete order.
+
+GameController.playGame() will call method Player.playerSays() with players(0) (this is important to give player id, because we will need to start this round over starting at another player later....and restart the round with "Taco"
+		CJ: I think instead of giving players an id, we fill the List<Player> players with the Player objects. Then we can easily iterate with players(0), players(1), etc.
+		CJ: When does the List<Player> players get instantiated? When do the individual Player objects get instantiated? When does the deck get instantiated? Shuffled? Dealt to each players(#).playerHand?
+		CJ: Only after this can we call players(0).playerSays() - which is probably more like GameController.players.get(0).playerSays() but it's easier to write the other way.
+
+players(0).playerSays() method displays String "Taco" to console and should return String "Taco" for future playerCheck() compare method.
+		CJ: What field do we have to store String "Taco" for future comparison and where is it located?
+			CJ: is this where Enums come in handy? Honestly not sure
+		CJ: or do we do
+			 Player.playerChecks() {
+				if (playerSays() == playerFlipsCard()) {
+					// initiate slap sequence
+				} else {}
+			}
+
+players(0) will remove top card from ArrayList<> playerHand with players(0).playerFlipsCard() method 
+	players(0).playerFlipsCard() will decrement ArrayList<> playerHand by 1 (the top card at position 0)
+	players(0).playerFlipsCard() will place the decremented card at the top of the pile via something like Pile.addToPile(players(0).playerFlipsCard())
+
+	players(0).playerFlipsCard() will display ASCII image of "Taco" and display String "Taco" to the console.
+		CJ: These are two separate operations, I think. But they ?can? be consolidated into one image
+		CJ: why not have Card.show(playerFlipsCard()) display the ASCII image? 
+		CJ: or use a  Card.show(Pile.showTopOfPile()) method?
+		CJ: any way about it, we probably only need one. 
+			CJ: but get it working, then get it right.
+
+	players(0).playerFlipsCard() calls method hasNoCards() to check players(0) ArrayList<> playerHand count.
+		CJ: need to define the hasNoCards() method somewhere. Probably to class Player? 
+
+		hasNoCards() checks for 0 cards 
+			if false, contine with GameController.playGame()
+				CJ: how to iterate to next player?
+				CJ: I think this is where player id will come in handy.
+
+			if true, calls GameController.announceWinner() in winnerList (think DuckRace display board)
+				CJ: winnerList isn't defined. N2H
+				CJ: is this necessary or should .announceWinner() just...announce the winner?
+
+		...hasNoCard() calls GameController.gameOver().  Update Board Display to show all winners and frequency of outcome.
+			CJ: the logic lines 34-46 is wonky. According to the current code, gameOver() uses (yet to be defined) hasNoCards() to set a boolean.
+
+Continue with Player.playerFlipCard()
+	CJ: seems like this should be "Continue with GameController.playGame() iterates to currentPlayer == [the last player's id + 1]
+ 
+- playerFlipCard() will call addToPile() method to increment <Deque> pile ++ 1 with "Taco" going to the bottom of the <Deque> pile.
+Next method
+- PlayerChecks() will compare result from playerSays() and playerFlipCard().  If they are not equal, then move on to Player2.
+- if not equal updateBoard with players(0) <ArrayList> playerHand and <Deque> pile .size.
+ 
+Player2
+playerSays() method displays to console, String "Cat" and should return String "Cat" for future playerCheck() compare method.
+Player 2 will remove top card from <ArrayList> playerHand with playerFlipCard() method  
+- playerFlipCard() will display ASCII image of cat and display "cat" to the console.  It needs to return "cat" for future playerCheck() compare method. 
+- PlayerFlipCard() will decrement <ArrayList> playerHand by 1. 
+- PlayerFlipCard  will call addToPile() method to increment <Deque> pile ++ 1 with "Cat" going to the bottom of the <Deque> pile.
+Next method
+playerCheck() will then compare result from playerSays() and playerFlipCard()
+If they are equal, then call playerSlaps().
+Next Method
+playerSlaps() method will display console display "To Slap, press Enter"
+playerSlaps() allows User to press enter based on local time date recording time enter is entered.
+playerSlap() calls method for NPC to randomly assign response time between .5 and 2 seconds.
+
+need method for player record response times, sort as a Map. If last, we impliment pile method to assign pile to losing player.
+  
+updateBoard with player2 <ArrayList> playerHand and <Deque> pile .size.
+
+
+
+CJ Proposes:			
+
+CJ: This, to me, is how the logic flows. I'm sure I missed something; I know I f'd up some {} and (). but it should be legible as pseudocode.
+
+CJ: Clearly haven't worked out any of the graphical stuff. Not something I'm really comfortable with. IMO we can sout() everything to make sure it flows right and then add pretty, but Keith seems really on top of the graphics so we might have an ace in the hole.
+
+	GameController.execute() becomes GameController.preGame/step1()	// or whatever
+		shows GameController.welcome()
+		prompts player for name promptForPlayerName()
+			instantiates List<Player> players; sets players(0) name to playerName
+		prompts playerName if playerName wants rules ?GameController.promptForHelp()?	// currently found in welcomeAndPromptForHelp()
+			if yes then show rules until user/playerName does something
+		prompts player to start the game
+			if true (on click, spacebar, whatever) call GameController.initialize/step2() // or whatever
+
+	GameController.playGame() becomes GameController.initialize/step2()	// or whatever
+			create NPCs	// currently have GameController.createPlayers() and [constructor Player()-> which needs to be further subclassed to a constructor in the Npc class]. Pick one, get rid of the other, but make it work then make it right.
+			call constructor Deck() to create allCards object (which is the deck)
+				shuffle	// constructor Deck() has Collections.shuffle(allCards)
+			distributeCards(allCards) evenly to players(#).playerHand	// or just players.size x 10?	// This is where I would cut off the initialize() stuff and actually start playGame()
+			do we need to instantiate the Pile?
+
+	GameController.playGame() either stays or becomes step3() // or whatever
+		declare int i = 0;
+			iterate:
+			 	currentPlayer = players(i)
+				players(i).playerSays()	//"T||C||G||C||P"
+					returns the next TCGCP String to be stored in ... ?GameController.playerSaysNameOfCard? (need to handle this)
+				players(i).playerFlipsCard()
+					players(i).playerHand(0) remove() decrements playerHand at position 0 (top of hand)
+						returns that card as Card1
+						if (players(i).hasNoCard == true) {
+							GameController.announceWinner(players(i))	
+						}	
+					else {
+						Pile.addToPile(Card1) pile increments by Card1
+						show(?GameController.playerSaysNameOfCard?)
+						Card.show(Card1)
+
+						if (players(i).playerSays() == valueOf(players(i).playerFlipsCard()) {
+							Player.playerSlaps() - all players do this; separate @Override method for Player User
+								record the time of player slaps and compare them with ?playerChecks()?
+									compare the times after the max time set in Npc.playerSlaps() using method(?)???
+										automatically assign the last player as the loser even if they haven't players(#).playerSlaps() yet
+							players(loser).playerHand.add(Pile) adds all the cards from the pile to the losing player's playerHand
+						}
+					
+					else if (players(i).playerSays() != valueOf(players(i).playerFlipsCard())) {
+						?pause?
+						repeat the whole damn loop from 101-121 with i++
+
+CJ: This, to me, is how the logic flows. I'm sure I missed something; I know I f'd up some {} and (). but it should be legible as pseudocode.
+
+CJ: Clearly haven't worked out any of the graphical stuff. Not something I fully grasp. IMO we can sout() everything to make sure it flows right and then add pretty, but Keith seems really on top of the graphics so we might have an ace in the hole.
+				
