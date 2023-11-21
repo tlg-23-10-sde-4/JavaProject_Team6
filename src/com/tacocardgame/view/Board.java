@@ -18,7 +18,12 @@ public class Board {
     }
 
     public void updateName(String playerName, int playerId) {
-        playerMap.putIfAbsent(playerId, new Player(playerName, playerId));
+        playerMap.putIfAbsent(playerId, new Player(playerName, playerId) {
+            @Override
+            public Long playerSlaps() {
+                return null;
+            }
+        });
     }
 
     public Collection<Player> getPlayers() {
