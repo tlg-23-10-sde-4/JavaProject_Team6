@@ -49,20 +49,21 @@ public class GameController {
 
     private void displayWelcomeSequence() throws IOException {
         List<String> welcomeImages = loadWelcomeImages();
-        for (String image : welcomeImages) {
-            Console.clear();
-            System.out.println(image);
-            try {
-                Thread.sleep(500); // display each image for 0.5 seconds
-            } catch (InterruptedException e) {
-                e.printStackTrace();
+        for (int i = 0; i < welcomeImages.size(); i++) {
+            System.out.println(welcomeImages.get(i)); // Display the image
+
+            if (i < welcomeImages.size() - 1) {
+                Console.pause(500); // pause for 0.5 seconds before clearing the screen
+                Console.clear(); // clear the screen for all but the last image
             }
         }
-        Console.clear();
+        Console.pause(8000); // trying to long pause for the last image, pause for 8 seconds
     }
 
     private List<String> loadWelcomeImages() throws IOException {
         List<String> images = new ArrayList<>();
+        String[] imageFiles = {"taco.txt", "cat.txt", "goat.txt", "cheese.txt", "pizza.txt", "tcgcp.txt"};      //updated
+
         for (int i = 1; i <= 8; i++) {
             String file = "resources/images/welcome-" + i + ".txt";
             images.add(Files.readString(Path.of(file)));
@@ -124,10 +125,4 @@ public class GameController {
         int lastIndex = slapTimes.indexOf(maxTime);
         return players.get(lastIndex);
     }
-
-
 }
-
-
-
-
