@@ -10,7 +10,7 @@ public class Deck {
     private List<Card> allCards = new ArrayList<>();
 
     public Deck() throws IOException {
-		
+        allCards = new ArrayList<>();
 		
         try {  // CJ to answer your question about over-right.  Great question.  Since it's a map there's a key,value pair.
 		// it would only over-write if the keys were the same.
@@ -24,8 +24,7 @@ public class Deck {
             nameTacoMap.put(CardType.CHEESE, Files.readString(Path.of("resources/images/cheese.txt")));
             nameTacoMap.put(CardType.PIZZA, Files.readString(Path.of("resources/images/pizza.txt")));
 
-			
-		
+
             for (var entry : nameTacoMap.entrySet()) {
                 for (int i = 0; i < 11; i++) { // Create 11 cards of each type
                     allCards.add(new Card(entry.getKey(), entry.getValue()));
@@ -35,6 +34,10 @@ public class Deck {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public List<Card> getAllCards() {
+        return new ArrayList<>(allCards); // Return a copy of the list
     }
 
     public Card nextCard() {
@@ -49,5 +52,6 @@ public class Deck {
 
         return temp.get(0);
     }
+
 }
 
