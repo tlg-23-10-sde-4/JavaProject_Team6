@@ -9,21 +9,14 @@ import java.nio.file.Path;
 import java.util.*;
 
 public class Board {
-    private final Map<Integer, Player> playerMap = new TreeMap<>();
     private final Map<CardType, String> cardImages = new EnumMap<>(CardType.class);
+
 
     public Board() {
         // Load card images
         cardImages.putAll(loadCardImages());
     }
 
-    public void updateName(String playerName, int playerId) {
-        playerMap.putIfAbsent(playerId, new Player(playerName, playerId));
-    }
-
-    public Collection<Player> getPlayers() {
-        return playerMap.values();
-    }
 
     private Map<CardType, String> loadCardImages() {
         Map<CardType, String> images = new EnumMap<>(CardType.class);
@@ -44,3 +37,4 @@ public class Board {
         return cardImages.get(type);
     }
 }
+
