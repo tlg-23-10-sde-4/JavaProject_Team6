@@ -94,7 +94,7 @@ public class GameController {
             else {
                 currentSpokenIndex = 0;
             }
-            Console.pause(750)
+            Console.pause(750);
             // Check for a match and handle slap if necessary
             if (flippedCard.getType().getLabel().equalsIgnoreCase(saidCard)) {
 //                    currentSpokenIndex = 0;
