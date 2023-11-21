@@ -8,17 +8,18 @@ import java.util.Scanner;
 
 public class User extends Player {
 
+    public User(String name) {
+        super(name);
+    }
+
     public User(String name, int playerId) {
-        setName(name);
-        setPlayerId(playerId);
+        super(name, playerId);
     }
 
     public User(String name, int playerId, ArrayList<Card> playerHand) {
-        setName(name);
-        setPlayerId(playerId);
-        setPlayerHand(playerHand);
+        super(name, playerId, playerHand);
+
     }
-    players.add(new User("player", 1, new ArrayList<>(playerHand)));
 
     // CANNOT test in IntelliJ; instead you must copy the method in Jshell and run it from there
     // The method ALMOST works correctly
@@ -27,7 +28,7 @@ public class User extends Player {
 
     @Override
     public long playerSlaps() {
-        long result = 1234567890;   // CJ: for testing - see if we are properly overriding the super
+          // CJ: for testing - see if we are properly overriding the super
         System.out.println("Scanner should load next"); // CJ: for testing
 
         Scanner playerSlap = new Scanner(System.in);
@@ -50,7 +51,7 @@ public class User extends Player {
 
         if (userInput.equals(" ")) {
             System.out.println(Player.getName() + " slaps");
-            return getName() + " slap time: " + startTime +"ms";
+            return getName() + " slap time: " + startTime + "ms";
         } else {
             return getName() + "didnt slap";
         }
