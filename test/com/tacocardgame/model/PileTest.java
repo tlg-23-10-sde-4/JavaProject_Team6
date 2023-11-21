@@ -4,6 +4,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Deque;
 
 import static com.tacocardgame.model.CardType.*;
@@ -23,6 +24,13 @@ public class PileTest {
 
     @Before
     public void initialize() {
+        playerHand = new ArrayList<>(Arrays.asList(cat, cat, goat, cheese, pizza, cat));
+        player = new Player("player", 3, (playerHand));
+        pile.addToPile(cheese);
+        pile.addToPile(taco);
+        pile.addToPile(taco);
+        pile.addToPile(taco);
+        pile.addToPile(taco);
         pile.addToPile(cat);
         pile.addToPile(taco);
         pile.addToPile(cheese);
@@ -35,8 +43,6 @@ public class PileTest {
         pile.addToPile(cat);
         System.out.println(pile.showTopOfPile());
     }
-
-
 
     @Test
     public void addToPile_shouldReturnException_whenAddNull() {
@@ -62,5 +68,26 @@ public class PileTest {
         System.out.println(pile.getSize());
     }
 
+    @Test
+    public void addToPile_shouldWorkWithPlayerFlipsCard() {
+        System.out.print("Player hand BEFORE the flip: ");
+        for (Card card : playerHand) {
+            System.out.print(card.getType() + " ");
+        }
+        System.out.println("\n");
+        Card topOfPile = pile.showTopOfPile();
+        System.out.println("Top card of the Pile: " + topOfPile.getType());
+        System.out.print("Flipped card: ");
+        Card card = player.playerFlipsCard(pile);
+        System.out.print(card.getType() + "\n");
+
+        System.out.print("Player hand AFTER the flip: ");
+        for (Card card1 : playerHand) {
+            System.out.print(card1.getType() + " ");
+        }
+        topOfPile = pile.showTopOfPile();
+        System.out.println("\n");
+        System.out.println("Top card of the Pile: " + topOfPile.getType());
+    }
 
 }

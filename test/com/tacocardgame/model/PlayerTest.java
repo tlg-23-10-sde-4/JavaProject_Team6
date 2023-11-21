@@ -109,7 +109,6 @@ public class PlayerTest {
         pile.clearPile();
         pile.addToPile(null);
         player.addCardsToPlayerHand(pile);
-
     }
 
 
