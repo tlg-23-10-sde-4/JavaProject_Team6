@@ -26,7 +26,7 @@ public class PlayerTest {
     @Before
     public void initialize() {
 //        pile.clearPile();
-        playerHand = new ArrayList<>(Arrays.asList(taco, cat, goat, cheese, pizza, taco));
+        playerHand = new ArrayList<>(Arrays.asList(cat, cat, goat, cheese, pizza, cat));
         player = new Player("player", 3, (playerHand));
         pile.addToPile(cheese);
         pile.addToPile(taco);
@@ -61,22 +61,27 @@ public class PlayerTest {
         }
     }
 
-//    @Test
-//    public void playerFlipsCard_shouldReturnTheCardAtPosition0AndDecrementTheHand() {
-//        System.out.print("Player hand BEFORE the flip: ");
-//        for (Card card : playerHand) {
-//            System.out.print(card.getType() + " ");
-//        }
-//        System.out.println("\n");
-//        System.out.print("Flipped card: ");
-//        Card card = player.playerFlipsCard();
-//        System.out.print(card.getType() + "\n");
-//
-//        System.out.print("Player hand AFTER the flip: ");
-//        for (Card card1 : playerHand) {
-//            System.out.print(card1.getType() + " ");
-//        }
-//    }
+    @Test
+    public void playerFlipsCard_shouldReturnTheCardAndAddItToThePile() {
+        System.out.print("Player hand BEFORE the flip: ");
+        for (Card card : playerHand) {
+            System.out.print(card.getType() + " ");
+        }
+        System.out.println("\n");
+        Card topOfPile = pile.showTopOfPile();
+        System.out.println("Top card of the Pile: " + topOfPile.getType());
+        System.out.print("Flipped card: ");
+        Card card = player.playerFlipsCard(pile);
+        System.out.print(card.getType() + "\n");
+
+        System.out.print("Player hand AFTER the flip: ");
+        for (Card card1 : playerHand) {
+            System.out.print(card1.getType() + " ");
+        }
+        topOfPile = pile.showTopOfPile();
+        System.out.println("\n");
+        System.out.println("Top card of the Pile: " + topOfPile.getType());
+    }
 
     @Test
     public void playerSlaps_shouldBeNull() throws InterruptedException {    // Method overridden in both subclasses
