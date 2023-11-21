@@ -4,7 +4,7 @@ package com.tacocardgame.model;
 
 import java.util.*;
 
-public class Player {
+public abstract class Player {
 
     // FIELDS
     // static final List<String> tacoList = new ArrayList<>(  //consider making enum class
@@ -40,6 +40,8 @@ public class Player {
     //# JS- need to retest.  This will return an instance of Card - as a counted pile From Pile
     // so I'm saying playerFlipsCard from the Pile pile and will return the instance of Card card-,
     // so we can use it for playerSlaps().
+
+
     public static Card playerFlipsCard(Pile pile) {
         if (playerHand.isEmpty()) {
             throw new NoSuchElementException("No cards are left to flip");
@@ -98,6 +100,8 @@ public class Player {
         pileAsArrayList = pile.dequeToArrayList();
         playerHand.addAll(pileAsArrayList);
     }
+
+    public abstract void takeTurn (Pile pile, List<Player> players);
 
     // GETTERS & SETTERS
 
