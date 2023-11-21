@@ -3,7 +3,6 @@ package com.tacocardgame.model;
 import com.apps.util.Prompter;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.Scanner;
 import java.util.concurrent.*;
 
@@ -28,7 +27,7 @@ public class User extends Player {
     /// If you press any other combination you will get the default value
 
     @Override
-    public long playerSlaps() {
+    public Long playerSlaps() {
         // User input logic for slapping
         long startTime = System.currentTimeMillis();
         long maxDuration = 2510; // 2.51 seconds in milliseconds

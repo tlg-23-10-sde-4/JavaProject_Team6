@@ -57,7 +57,7 @@ public abstract class Player {  //abstract class complete #JS
         this.playerHand.addAll(cards);
     }
 
-    public void takeTurn(Pile pile) {
+    public Card takeTurn(Pile pile) {
         Card cardFlipped = playerFlipsCard(pile);
         CardType cardType = cardFlipped.getType();
         String asciiArt = Deck.getAsciiCardType(cardType);
@@ -65,6 +65,7 @@ public abstract class Player {  //abstract class complete #JS
 
         System.out.println(getName() + " flipped " + cardFlipped + " and says " + playerStatement);
         System.out.println(asciiArt);
+        return cardFlipped;
     }
 
     public Card playerFlipsCard(Pile pile) {
@@ -82,6 +83,20 @@ public abstract class Player {  //abstract class complete #JS
 
     }
 
-    // implement the full version in class Npc and class User.
-    public abstract long playerSlaps();
+    public boolean hasMatch(Card topCard) {
+        if (topCard == null) {
+            throw new IllegalArgumentException("Top card cannot be null");
+        }
+
+        int position = getPlayerId() - 1; // Assuming player IDs start at 1
+        String expectedCardLabel = Objects.requireNonNull(CardType.findByPosition(position % CardType.values().length)).getLabel();
+
+        return topCard.getType().getLabel().equalsIgnoreCase(expectedCardLabel);
+
+        // implement the full version in class Npc and class User.
+
+    }
+
+    public abstract Long playerSlaps();
+
 }
