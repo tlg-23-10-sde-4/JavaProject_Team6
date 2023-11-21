@@ -36,11 +36,6 @@ public abstract class Player {
 
     // METHODS
 
-    // CJ: test successful 11/19  # JS- I changed playerFlipsCard to dec&inc card
-    //# JS- need to retest.  This will return an instance of Card - as a counted pile From Pile
-    // so I'm saying playerFlipsCard from the Pile pile and will return the instance of Card card-,
-    // so we can use it for playerSlaps().
-
 
     public static Card playerFlipsCard(Pile pile) {
         if (playerHand.isEmpty()) {
@@ -77,8 +72,6 @@ public abstract class Player {
         pileAsArrayList = pile.dequeToArrayList();
         playerHand.addAll(pileAsArrayList);
     }
-
-    public abstract void takeTurn (Pile pile, List<Player> players);
 
     // GETTERS & SETTERS
 

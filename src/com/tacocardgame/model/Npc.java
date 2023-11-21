@@ -22,6 +22,10 @@ public class Npc extends Player {
         setPlayerHand(playerHand);
     }
 
+
+
+
+
     @Override
     public long playerSlaps() {
 
