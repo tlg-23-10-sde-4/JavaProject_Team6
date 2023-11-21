@@ -5,6 +5,7 @@ import com.apps.util.Prompter;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Scanner;
+import java.util.concurrent.*;
 
 public class User extends Player {
 
@@ -30,10 +31,23 @@ public class User extends Player {
     public long playerSlaps() {
         // User input logic for slapping
         long startTime = System.currentTimeMillis();
+        long maxDuration = 2510; // 2.51 seconds in milliseconds
+
         Prompter prompter = new Prompter(new Scanner(System.in));
-        prompter.prompt("Press the space bar to slap: ");
+        ExecutorService executor = Executors.newSingleThreadExecutor();
+        Future<String> future = executor.submit(() -> prompter.prompt("Press the space bar to slap: "));
+
+        try {
+            future.get(maxDuration, TimeUnit.MILLISECONDS);
+        } catch (InterruptedException | ExecutionException e) {
+            // Handle exceptions here
+        } catch (TimeoutException e) {
+            future.cancel(true); // Cancel the prompt if it exceeds the time limit
+        }
+
+        executor.shutdownNow(); // Shutdown the executor service
 
         long endTime = System.currentTimeMillis();
-        return endTime - startTime; // Return slap time
+        return Math.min(endTime - startTime, maxDuration); // Return slap time, but not more than 2.51 seconds
     }
 }
