@@ -2,10 +2,7 @@ package com.tacocardgame.controller;
 
 import com.apps.util.Console;
 import com.apps.util.Prompter;
-import com.tacocardgame.model.Card;
-import com.tacocardgame.model.Deck;
-import com.tacocardgame.model.Pile;
-import com.tacocardgame.model.Player;
+import com.tacocardgame.model.*;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -73,7 +70,7 @@ public class GameController {
         return playerName;
     }
 
-    //Distro cards to players
+  /*  //Distro cards to players
     private void distributeCards() {
         int cardsPerPlayer = deck.getAllCards().size() / players.size();
         for (Player player : players) {
@@ -81,13 +78,13 @@ public class GameController {
                 player.getPlayerHand().add(deck.nextCard()); // Assuming nextCard() method removes and returns the top card
             }
         }
-    }
+    }*/
 
-    private void playGame() {
+    public void playGame() {
         boolean gameWon = false;
         Prompter prompter = new Prompter(new Scanner(System.in));
 
-        while (!gameWon) {
+        while (gameWon) {       //gameWon default is false, meaning game NOT won
             long roundStartTime = System.currentTimeMillis();        //records the start time for each player's turn
             ExecutorService executorService = Executors.newCachedThreadPool();  //managing slap threads
             Player lastPlayerToSlap = null;
@@ -98,18 +95,20 @@ public class GameController {
                 System.out.println(currentPlayer.getName() + " says: " + playerStatement);
 
                 if (playerStatement.equalsIgnoreCase(middleCard.getType().getLabel())) {    // used to compare strings of playerSays and middle card name, ignoring case
-                // slap protocol begins
+                    // slap protocol begins
                     boolean playerSlapped = false;
 
                     for (Player player : players) {
+                        currentPlayer.takeTurn();
 
                         if (player != currentPlayer) {
-                            //TODO: create isUser() in Player class, * PLAYERID
-                            if (!player.isUser()) {        // keith, what are the properties of a player that is not a NPC?
+                            /*playerid=1 or not*/
+                            //assuming player 1 is only human user, create isUser() in Player class, * PLAYERID
+                            if (player.getPlayerId()!= 1) {        // keith, what are the properties of a player that is not a NPC?
                                 // As in, what would their playerID be? you can define isUser() this way.  #JS 20NOV 1212
                                 executorService.submit(() -> {
                                     Random random = new Random();
-                                    int npcSlapDelay = random.nextInt(2000);     //random delays between 0-2000ms
+                                    int npcSlapDelay = random.nextInt(2000);     //random delays between 0-2000ms   //hardcode testing who wins every single time.
 
                                     try {
                                         Thread.sleep(npcSlapDelay);     //slap delay intro
@@ -121,38 +120,44 @@ public class GameController {
                                 });
                             } else {        //human actions
 
-                                prompter.info("Press the space bar to slap");
-                                String userInput = prompter.prompt("");
+                                String userSlapResult = User.userSlaps();
+                                System.out.println(userSlapResult);
 
-                                    if (userInput.equals(" ")) {
-                                        System.out.println(player.getName() + " slaps");
-                                        playerSlapped = true;
-                                    }
+//                                prompter.info("Press the space bar to slap");
+//                                String userInput = prompter.prompt("");
+//
+//                                if (userInput.equals(" ")) {
+//                                    System.out.println(player.getName() + " slaps");
+//                                    playerSlapped = true;
+//                                }
 
+                            }
+                            if (!playerSlapped) {
+                                System.out.println(currentPlayer.getName() + " is the last to slap!");
+                                long endTime = System.currentTimeMillis();      //records the end time slapped for last player calculation
+                                long timeElapsed = endTime - roundStartTime;
+                                System.out.println("Slap time for last player: " + timeElapsed + "milliseconds");
+                                Player.addCardsToPlayerHand;
+                            }
+
+                        }
                     }
-                    if (!playerSlapped) {
-                        System.out.println(currentPlayer.getName() + " is the last to slap!");
-                        long endTime = System.currentTimeMillis();      //records the end time slapped for last player calculation
-                        long timeElapsed = endTime - roundStartTime;
-                        System.out.println("Slap time for last player: " + timeElapsed + "milliseconds");
-                        pile.clearPile();
-                    }
 
-                }
-            }
-
-            //check if player has won
+                    //check if player has won
                     if (lastPlayerToSlap != null) {
-                        lastPlayerToSlap.addCardsToPlayerHand(Player.card()); //TODO: getMiddleStack() or identify () in Pile Adds the entire middle stack to the last slapped player's set of cards
-                if (Player.getPlayerHand().isEmpty()) { // KP: much simpler than creating a hasNoCards() method  #JS- Fact.
-                    System.out.println(Player.getName() + " wins the game!");   //announceWinner(); when checkCard method shows a player's cards = 0
-                    gameWon = true;
+                        lastPlayerToSlap.addCardsToPlayerHand(Player.getPlayerHand()); //TODO: getMiddleStack() or identify () in Pile Adds the entire middle stack to the last slapped player's set of cards
+                        if (Player.getPlayerHand().isEmpty()) { // KP: much simpler than creating a hasNoCards() method  #JS- Fact.
+                            System.out.println(Player.getName() + " wins the game!");   //announceWinner(); when checkCard method shows a player's cards = 0
+                            gameWon = true;
+                        }
+                    }
+
+                    executorService.shutdown();
                 }
             }
-
-            executorService.shutdown();
         }
     }
+}
 
 //    private boolean gameOver() {
 //        boolean result = false;
@@ -166,18 +171,17 @@ public class GameController {
 //        return result;
 //    }
 
-    private void welcome() {
-        Console.clear();
+//    private void welcome() {
+//        Console.clear();
+//
+//        try {
+//            String welcomeBanner = Files.readString(Path.of("images/welcometo.txt"));
+//            String welcomeBanner2 = Files.readString(Path.of("images/tcgcp.txt"));
+//            prompter.info(welcomeBanner);
+//            prompter.info(welcomeBanner2);
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
 
-        try {
-            String welcomeBanner = Files.readString(Path.of("images/welcometo.txt"));
-            String welcomeBanner2 = Files.readString(Path.of("images/tcgcp.txt"));
-            prompter.info(welcomeBanner);
-            prompter.info(welcomeBanner2);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        Console.blankLines(2);
-    }
-}
+//        Console.blankLines(2);
+//    }
