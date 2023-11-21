@@ -1,0 +1,229 @@
+//Priorities for Model View Controller Design Pattern
+
+MODEL Priorities
+
+Class ModelGame   //TODO: Build
+  methods:
+    startGame(),
+    nextTurn(),
+    endTurn(), /*when slap occurs*/
+    startRound(),
+    endRound() /*when slap occurs, update board*/, 
+    endGame()
+
+Class ModelDealer  //TODO Build
+  methods: 
+    shuffleCards() */ random number generator */
+    dealCards() */ distributes initial card count, dealerDeck will deckMinus() while playerDeck will deckPlus() with each card dist */  
+    deckMinus() /* decrement of 1 - init dealer deck dealCards(), for active player with each nextTurn() */, 
+    deckPlus() /* increment of 1 - init to each playerDeck with dealCards(), to dealer deck each nextTurn() */, 
+    deckDump() /* increment of dealerDeck at each endTurn(), player assigned slowest "slap" will recieve the dealerDeck */
+
+Class ModelCards   //TODO: Build
+/* normal - taco, cat, goat, cheese, pizza; N2H bonus cards */ 
+
+Build Class Player (Abstract)
+Properties: int numPlayer, int playerCardDeck (ArrayList)        
+	methods: playerSays(), playerDisplayCard(), playerChecks(), playerWaits(), playerSlaps()
+
+Build subclass UserPlayer
+	Override methods: playerSays(), displayCard(), playerChecks(), playerWaits(), playerSlaps()
+
+Build subclass NpcPlayer
+	Override methods: playerSays(), displayCard(), playerChecks(), playerWaits(), playerSlaps()
+
+
+VIEW Priorities
+
+Image class 
+  inlcude ASCII images for 5 types, along with numbers for players, maybe something for the Dealer
+
+
+Display Board class  // includes 
+  what do we want displayed/shown?
+
+  -Welcome Screen
+    select number of players /* N2H difficulty */
+ 
+  -Rules Screen
+    Displays game rules
+
+  -Display Screen
+    1. Players - each player should be an generic 1, 2, 3, 4, 5 - gets image from images file associated with number
+      */  possible deck with number updates for each player */
+    
+    2. Card - playerDisplayCard() - tcgcp card ascii image '' same as above
+    
+    3. Dealer?  
+    Maybe just running total of dealerDeck w playerDisplayCard() 
+
+GamePlay:      
+  startGame(), 
+  showDisplay(),
+    playerSays(), brief wait (difficulty dependent), playerDisplayCard
+  updateDisplay()
+  
+
+Situation: two outcomes ONLY.  They either match or don't match
+
+Situation 1: NO MATCH
+
+			             3333  
+ 		  	                    3
+                               		    33
+                                		      3
+                             		3333   Player Three Says: 
+                                           
+                      
+ 222			                                          4  4                        				                      
+2   2    			                                          4  4                						                      
+   2                             	                                         4444                         
+ 2         			      		                   4 					                    
+22222    Player Two Says: 			     4	  Player Four Says: 				                            
+
+                             
+                        |\___/|                      ,-. 
+                        |o   o|_______________       | | 
+  }""""""""""""""""{""" \  w  /              \`.    ,',' 
+ {  Meow-meow-meow  }   _`---'           ,    |.`--' ,'  
+  }                {   (____``\  |````   (    \ `---'    
+  """"""""""""""""""    (________|````````\   /)         
+                                           ) //          
+                                          / //           
+                                         / //            
+                                         (//
+
+  1				                        55555				
+ 11				                        5
+  1					         55555
+  1					                  5
+11111	Player One Says: "Taco"		         55555    Player Five Says: 
+
+		         Dealer 
+
+Step 1: playerSays: "Taco"
+Step 2: playerDisplayCard shows: "Cat" image
+Step 3: Player 1 deck is decremented by 1
+Step 3: playerCheck() calls on Model to compare.
+Step 3: Model compares String, if (PlayerSays != PlayerDisplayCards) then....
+	Player 1 goes into playerWait() method
+	Player 2 goes from playerWait() method to playerSays()
+This method repeats WHILE condition playerSays() != PlayerDisplayCards()
+
+
+Situation 2:MATCH
+
+		             3333  
+ 		                  3
+                               33
+                                3
+                          	           3333   Player Three Says: 
+                                           
+                      
+ 222			                          4  4                        				                      
+2   2    			                  4  4                						                      
+   2                                              4444                         
+ 2         			                     4 					                    
+22222    Player Two Says: 			     4	  Player Four Says: 				                            
+
+             .-"`'""`'""`'""`'""`'""`'-.
+           .'     .----------------.     '.
+         /      (   Let's Taco 'Bout   )     \
+        |         `----------------'         |
+         \                                   /
+           `.                               .'
+             '-._                       _.-'
+                 `"'""`'""`'""`'""`'"`
+  1				                 55555				
+ 11				                 5
+  1					         55555
+  1					             5
+11111	Player One Says: "Taco"		         55555    Player Five Says: 
+
+		         Dealer 
+
+
+Step 1: playerSays: "Taco"
+Step 2: playerDisplayCard shows: "Taco" image
+Step 3: Player 1 deck is decremented by 1
+Step 3: playerCheck() calls on Model to compare.
+Step 3: Model compares String, if (PlayerSays == PlayerDisplayCards) then all players can initiate method
+	playerSlaps().  Probably an "S" or spacebar input from scanner.  
+	playerSlaps() dependant on true playerCheck
+Step 4: Model method slapLastPlayer() identifies last player to "slap". slapLastPlayer result feeds to updateBoard
+
+
+
+DisplayScoreboard  //could be subclass of DisplayBoard?
+what do we want displayed?
+PlayerCardCount Must!! 
+
+
+DisplayRegistration //registration of players
+player objects input with scanner
+UserName?
+How many Players?  
+
+
+Model Classes:
+
+Player (Abstract Base Class)
+Properties: numPlayer, playerCardDeck (ArrayList)
+Methods: playerSays(), playerDisplayCard(), PlayerCheck(), playerWaits(), playerSlaps()
+User (Subclass of Player, IS-A Player)
+Inherits all properties and methods from Player
+NPC (Subclass of Player, IS-A Player)
+Inherits and customizes methods from Player
+Game
+Methods: startGame, nextTurn, endTurn, startRound, endRound, endGame
+Hand
+Method: decrementCardCount
+Dealer
+Methods: shuffleCards, dealCard
+Card
+Types of Cards: Normal (Taco, Cat, Goat, Cheese, Pizza), Wild (Gorilla, Groundhog, Narwhal)
+Board
+Methods: updateBoard, show, slapLastPlayer()
+Display
+Methods for displaying various game states and information
+View Classes:
+
+Image
+Contains ASCII image references/locations for console display
+Any other classes dedicated to UI elements
+Controller Classes:
+Controllers to handle user input and game logic.
+
+Relationships:
+IS-A Relationship:
+User IS-A Player
+NPC IS-A Player
+HAS-A Relationship:
+Game HAS-A Player (it interacts with players)
+Game HAS-A Dealer and Hand
+Board HAS-A relationship with Player (to track player states and scores)
+USE-A Relationship:
+Player USES Card (to play and display cards)
+Dealer USES Card (to shuffle and deal)
+Game and Board USE Display and Image for output
+
+
+Additional Points:
+Updating the Number of Cards:
+This could be a property within Player class (playerCardDeck). After each round, update this list based on the game's outcome.
+Wild Card Reaction Methods:
+These could be part of the Game class, handling the logic for when wild cards are played.
+MVC Structure:
+Model: Player, NPC, User, Game, Card, Dealer, Hand, Board
+View: Display, Image
+Controller: Controllers that take input from the View and manipulate the Model accordingly.
+
+
+OPTIONAL CONSTRUCTS - WOULD BE COOL TO IMPLEMENT AFTER FUNCTIONAL PROGRAM
+Elaborate GUI
+Incorporate Narwhal, Gorilla, etc...
+Easy/Medium/Hard modes
+RoundCount
+SlapLossCount
+Pick your avatar
+Scoreboard showing wins/player and other statistical coolness?

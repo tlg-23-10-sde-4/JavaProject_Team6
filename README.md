@@ -2,34 +2,34 @@
 
 ## An Attempt at a Popular Children's Game in Java
 
-Provide a short description explaining the what, why, and how of your project. Use the following questions as a guide:
+Our group attempted to bring the lively children's game [Taco Cat Goat Cheese Pizza](https://www.cardhaus.com/taco-cat-goat-cheese-pizza/) to life on your computer. 
 
-- What was your motivation?
-- Why did you build this project? (Note: the answer is not "Because it was a homework assignment.")
-- What problem does it solve?
-- What did you learn?
+## Implementation
 
+1. We started by having a [conversation](resources/READMEReferences/TCGCP%20Conversation.txt) about how the game plays out: which thing does what (and to whom). 
+2. We built our [first UML](resources/READMEReferences/ClassDiagram_20231115%20-%20few%20fields.jpg) diagram based off of this conversation.
+3. We refined that UML, realizing the Hand class could instead be a field within Player, and that we could combine Dealer and Deck. Alas, that product wasn't captured.
 
+4. We spent considerable time attempting to refine our understanding of the game flow, objects, actions, and relationships.
+    [#1](resources/READMEReferences/Game%20Logic-Error%20Finding.txt)
+    [#2](resources/READMEReferences/Model%20Classes%20based%20on%20current%20UML.txt)
+    [#3](resources/READMEReferences/procedures.txt)
+    [#4](resources/READMEReferences/Class-Method%20Structure.txt)
 
-## Installation
+5. We finally started coding. About a day later we identified a need [to track all the different fields/methods we were using](resources/READMEReferences/TCGCP%20Classes,%20Methods,%20Fields.xlsx) to provide a common language.
 
-What are the steps required to install your project? Provide a step-by-step description of how to get the development environment running.
+6. And we were stuck in a loop of writing, editing, discussing for the next 3+ days.
 
-## Usage
+## Final Product aka Challenges
 
-Provide instructions and examples for use. Include screenshots as needed.
-
-To add a screenshot, create an `assets/images` folder in your repository and upload your screenshot to it. Then, using the relative filepath, add it to your README using the following syntax:
-
-    ```md
-    ![alt text](assets/images/screenshot.png)
-    ```
+While we did get a working product, we did not come close to meeting our aspirational goals outlined in our conversation.
 
 ## Credits
 
 This game was created as part of TLG 23.10BL SDE4's Week 6 Project. 
 
 Its creators are Justin Stafford, Keith Perkins, and Christopher Ulrich.
+All errors are our own.
 
 Significant guidance, contributions, and snippets from Jay Rostosky.
 
@@ -39,10 +39,6 @@ Please contact TLG if you wish to reproduce any of this project in whole or in p
 
 ---
 
-## How to Contribute
-
-If you created an application or package and would like other developers to contribute it, you can include guidelines for how to do so. The [Contributor Covenant](https://www.contributor-covenant.org/) is an industry standard, but you can always write your own if you'd prefer.
-
 ## Testing
 
-This game has not been
+This game has not been thoroughly tested; results not guaranteed. We are not a doctor.
