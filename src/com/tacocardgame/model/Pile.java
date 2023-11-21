@@ -4,7 +4,6 @@ import java.util.*;
 
 public class Pile {
 
-
     private Deque<Card> pile = new ArrayDeque<>();
 
     public void addToPile(Card card) {
