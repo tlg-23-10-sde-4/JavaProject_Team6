@@ -26,10 +26,8 @@ public class GameController {
         this.players = new ArrayList<>();
         this.pile = new Pile();
         this.boardView = new BoardView();
-
         BoardView boardView = new BoardView();
         boardView.show(players); // Assuming 'players' is your List<Player>
-
         // Initialize players here
         players.add(new User("User", 1)); // User player
         players.add(new Npc("Chuck", 2)); // NPC players
@@ -37,7 +35,6 @@ public class GameController {
         players.add(new Npc("Justin", 4));
         players.add(new Npc("Keith", 5));
     }
-
 
     public void execute() throws IOException {
         Console.clear();
@@ -49,7 +46,6 @@ public class GameController {
         playGame();
     }
 
-
     private void displayWelcomeSequence() throws IOException {
         List<String> welcomeImages = loadWelcomeImages();
         for (int i = 0; i < welcomeImages.size(); i++) {
@@ -59,7 +55,7 @@ public class GameController {
                 Console.pause(500); // Pause for 0.5 seconds for all images except the last
                 Console.clear();
             } else {
-                Console.pause(20000); //longer pause for the last image, i.e., 20 seconds
+                Console.pause(2000); //longer pause for the last image, i.e., 20 seconds
             }
         }
         Console.clear();
@@ -108,7 +104,6 @@ public class GameController {
                 handleSlap();
             }
 
-            // Move to the next player
             currentPlayerIndex = (currentPlayerIndex + 1) % players.size();
             Console.clear();
         }
@@ -116,7 +111,7 @@ public class GameController {
         while (gameWon == false);
 
         // Announce winner
-        Player winner = players.get((currentPlayerIndex - 1 + players.size()) % players.size());
+//        Player winner = players.get((currentPlayerIndex - 1 + players.size()) % players.size());
         System.out.println("Game Over! The winner is " + winner.getName());
     }
 
