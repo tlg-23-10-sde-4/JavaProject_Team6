@@ -3,6 +3,7 @@ package com.tacocardgame.model;
 import com.apps.util.Prompter;
 
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 import java.util.concurrent.*;
 
@@ -28,25 +29,26 @@ public class User extends Player {
 
     @Override
     public Long playerSlaps() {
-        // User input logic for slapping
         long startTime = System.currentTimeMillis();
-        long maxDuration = 2510; // 2.51 seconds in milliseconds
+        long maxDuration = 3000; // 3 seconds (in ms)
 
-        Prompter prompter = new Prompter(new Scanner(System.in));
+        Scanner scanner = new Scanner(System.in);
+        Prompter prompter = new Prompter(scanner);
         ExecutorService executor = Executors.newSingleThreadExecutor();
         Future<String> future = executor.submit(() -> prompter.prompt("Press the space bar to slap: "));
 
         try {
-            future.get(maxDuration, TimeUnit.MILLISECONDS);
+            String userInput = future.get(maxDuration, TimeUnit.MILLISECONDS);
+            if (!userInput.equals(" ")) throw new InputMismatchException("Invalid input. User must press space bar to slap.");
         } catch (InterruptedException | ExecutionException e) {
             // Handle exceptions here
-        } catch (TimeoutException e) {
-            future.cancel(true); // Cancel the prompt if it exceeds the time limit
+        } catch (TimeoutException e) throws new TimeoutException("Time limit exceeded. Slap faster!");
+            future.cancel(true);
         }
 
         executor.shutdownNow(); // Shutdown the executor service
 
         long endTime = System.currentTimeMillis();
-        return Math.min(endTime - startTime, maxDuration); // Return slap time, but not more than 2.51 seconds
+        return Math.min(endTime - startTime, maxDuration); // Return slap time, but not more than 3 seconds
     }
 }
