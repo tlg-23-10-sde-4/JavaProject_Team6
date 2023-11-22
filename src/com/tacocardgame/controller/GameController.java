@@ -16,6 +16,7 @@ public class GameController {
     private List<Player> players;
     private Pile pile;
     private Player winner;
+    private boolean gameWon = false;
     private BoardView boardView;
     int currentPlayerIndex = 0;
     int currentSpokenIndex = 0;
@@ -80,9 +81,15 @@ public class GameController {
 
     public void playGame() {
         Console.clear();
-        boolean gameWon = false;
+        gameWon = false;
         do {
-
+            for (Player player : players) {
+                if (player.getPlayerHand().isEmpty()) {
+                    gameWon = true;
+                    winner = player;
+                    break;
+                }
+            }
             Player currentPlayer = players.get(currentPlayerIndex);
             gameWon = currentPlayer.getPlayerHand().isEmpty();
             Card flippedCard = currentPlayer.takeTurn(pile);
@@ -98,14 +105,14 @@ public class GameController {
             Console.pause(1500);
             // Check for a match and handle slap if necessary
             if (flippedCard.getType().getLabel().equalsIgnoreCase(saidCard)) {
-
                 handleSlap();
             }
 
             // Move to the next player
             currentPlayerIndex = (currentPlayerIndex + 1) % players.size();
             Console.clear();
-        }                    // Check if the game is won
+        }
+        // Check if the game is won
         while (gameWon == false);
 
         // Announce winner
